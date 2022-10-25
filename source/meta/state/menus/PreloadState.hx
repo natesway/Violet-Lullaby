@@ -109,7 +109,7 @@ class PreloadState extends FlxState
 
 			var savedGraphic:FlxGraphic = Paths.returnGraphic(i);
 			savedGraphic.persist = true;
-            Paths.excludeAsset(i);
+			Paths.excludeAsset(i);
 			trace(savedGraphic + ', yeah its working');
 
 			countUp++;

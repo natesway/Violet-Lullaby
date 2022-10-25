@@ -11,12 +11,11 @@ class FlxGraphicsShader extends GraphicsShader
 	public var colorOffset:ShaderParameter<Float>;
 	public var hasTransform:ShaderParameter<Bool>;
 	public var hasColorTransform:ShaderParameter<Bool>;
-	
+
 	public function new(glVertexSource:String = "", glFragmentSource:String = "")
 	{
 		if (glVertexSource == "")
-			glVertexSource =
-			"#pragma header
+			glVertexSource = "#pragma header
 			
 			attribute float alpha;
 			attribute vec4 colorMultiplier;
@@ -35,20 +34,18 @@ class FlxGraphicsShader extends GraphicsShader
 					openfl_ColorMultiplierv = colorMultiplier;
 				}
 			}";
-		
+
 		if (glFragmentSource == "")
-			glFragmentSource =
-			"#pragma header
+			glFragmentSource = "#pragma header
 			
 			void main(void)
 			{
 				gl_FragColor = flixel_texture2D(bitmap, openfl_TextureCoordv);
 			}";
-		
+
 		super(glVertexSource, glFragmentSource, false);
-		
-		glFragmentHeader +=
-		"uniform bool hasTransform;
+
+		glFragmentHeader += "uniform bool hasTransform;
 		uniform bool hasColorTransform;
 
 		vec4 flixel_texture2D(sampler2D bitmap, vec2 coord)
@@ -85,7 +82,7 @@ class FlxGraphicsShader extends GraphicsShader
 			}
 			return vec4(0.0, 0.0, 0.0, 0.0);
 		}";
-		
+
 		__initGL();
 
 		bitmap = data.bitmap;

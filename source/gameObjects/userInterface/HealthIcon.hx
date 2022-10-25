@@ -56,7 +56,7 @@ class HealthIcon extends FlxSprite
 		{
 			if (newPlayer != null)
 				isPlayer = newPlayer;
-			
+
 			offsetX = 0;
 			offsetY = 0;
 			animatedIcon = false;
@@ -74,8 +74,9 @@ class HealthIcon extends FlxSprite
 					iconPath = 'face';
 				trace('$char icon trying $iconPath instead you fuck');
 			}
-			
-			switch (char) {
+
+			switch (char)
+			{
 				case 'hypno2' | 'hypno-two':
 					// LOOK IM LAZY :sob:
 					frames = Paths.getSparrowAtlas('icons/Hypno2 Health Icon');
@@ -112,7 +113,7 @@ class HealthIcon extends FlxSprite
 					animation.addByPrefix(char, 'missingno icons', 0, true);
 					animation.play(char);
 					offsetX = 24;
-				case 'wigglytuff': 
+				case 'wigglytuff':
 					// lmao dont mind me just importing forever's dynamic healthicons
 					var iconGraphic:FlxGraphic = Paths.image('icons/icon-wigglytuff');
 					loadGraphic(iconGraphic, true, Std.int(iconGraphic.width / 4), iconGraphic.height);
@@ -121,7 +122,7 @@ class HealthIcon extends FlxSprite
 					animation.play(char);
 					updateHitbox();
 					offsetY = -16;
-				case 'wiggles-death-stare' | 'wiggles-terror': 
+				case 'wiggles-death-stare' | 'wiggles-terror':
 					var iconGraphic:FlxGraphic = Paths.image('icons/icon-wigglytuff');
 					loadGraphic(iconGraphic, true, Std.int(iconGraphic.width / 4), iconGraphic.height);
 
@@ -130,7 +131,7 @@ class HealthIcon extends FlxSprite
 					updateHitbox();
 					offsetY = -16;
 				case 'jigglyfront':
-					//offsetY = -16;
+					// offsetY = -16;
 					var iconGraphic:FlxGraphic = Paths.image('icons/icon-jigglypuff');
 					loadGraphic(iconGraphic, true, Std.int(iconGraphic.width / 2), iconGraphic.height);
 
@@ -149,14 +150,14 @@ class HealthIcon extends FlxSprite
 				case 'beelze':
 					var iconGraphic:FlxGraphic = Paths.image('icons/icon-beelze');
 					loadGraphic(iconGraphic, true, Std.int(iconGraphic.width / 2), iconGraphic.height);
-	
+
 					animation.add(char, [0], 0, false, false);
 					animation.play(char);
 					updateHitbox();
 				case 'beelzescary':
 					var iconGraphic:FlxGraphic = Paths.image('icons/icon-beelze');
 					loadGraphic(iconGraphic, true, Std.int(iconGraphic.width / 2), iconGraphic.height);
-	
+
 					animation.add(char, [1], 0, false, false);
 					animation.play(char);
 					updateHitbox();
@@ -171,7 +172,7 @@ class HealthIcon extends FlxSprite
 				case 'smol-hypno':
 					var file:FlxAtlasFrames = Paths.getSparrowAtlas('icons/SmallHypnoIcons');
 					frames = file;
-					animation.addByIndices(char, 'SmallHypnoIcons instance 1',[0,4], "", 24, false, isPlayer);
+					animation.addByIndices(char, 'SmallHypnoIcons instance 1', [0, 4], "", 24, false, isPlayer);
 					animation.play(char);
 				case 'alexis':
 					var iconGraphic:FlxGraphic = Paths.image('icons/icon-alexis');
@@ -215,18 +216,19 @@ class HealthIcon extends FlxSprite
 					animation.add(char, [0, 1], 0, false, isPlayer);
 					animation.play(char);
 					updateHitbox();
-				
 			}
 			this.char = char;
 
 			updateHitbox();
-			if (char == 'gold') {
+			if (char == 'gold')
+			{
 				setGraphicSize(Std.int(width * 0.8));
 				updateHitbox();
 			}
 			if (char == 'silver')
 				offsetY = -16;
-			if (char == 'glitchy-red') offsetY = -15;
+			if (char == 'glitchy-red')
+				offsetY = -15;
 			initialWidth = width;
 			initialHeight = height;
 

@@ -101,7 +101,9 @@ class CoolUtil
 	}
 
 	public static var lerpSnap:Bool = false;
-	public static function fakeLerp(val1:Float, val2:Float, ratio:Float) {
+
+	public static function fakeLerp(val1:Float, val2:Float, ratio:Float)
+	{
 		if (lerpSnap)
 			return FlxMath.lerp(val1, val2, 1);
 		return FlxMath.lerp(val1, val2, ratio);

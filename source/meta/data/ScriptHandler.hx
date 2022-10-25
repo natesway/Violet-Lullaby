@@ -72,11 +72,11 @@ class ScriptHandler
 		exp.set("FlxGraphicsShader", FlxGraphicsShader);
 		exp.set("FlxColor", RealColor); // lol
 		exp.set("FlxGroup", FlxGroup);
-		
+
 		// Classes (Forever)
 		exp.set("Init", Init);
 		exp.set("Paths", Paths);
-        exp.set("Note", Note);
+		exp.set("Note", Note);
 		exp.set("Strumline", Strumline);
 		exp.set("Events", Events);
 		exp.set("Conductor", Conductor);
@@ -85,10 +85,10 @@ class ScriptHandler
 		exp.set("Boyfriend", Boyfriend);
 		exp.set("FNFSprite", FNFSprite);
 		exp.set("HealthIcon", HealthIcon);
-        exp.set("PlayState", PlayState);
+		exp.set("PlayState", PlayState);
 		exp.set("CelebiNote", CelebiNote);
-        
-        //
+
+		//
 		parser.allowTypes = true;
 	}
 

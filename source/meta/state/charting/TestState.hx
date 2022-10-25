@@ -52,7 +52,8 @@ class TestState extends MusicBeatState
 		// FlxG.camera.setFilters();
 	}
 
-	override public function update(elapsed:Float) {
+	override public function update(elapsed:Float)
+	{
 		super.update(elapsed);
 	}
 

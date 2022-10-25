@@ -29,13 +29,15 @@ class Paths
 	// set the current level top the condition of this function if called
 	static public function setCurrentLevel(name:String)
 	{
-		if (currentLevel != name) {
+		if (currentLevel != name)
+		{
 			previousLevel = currentLevel;
 			currentLevel = name.toLowerCase();
 		}
 	}
 
-	static public function revertCurrentLevel() {
+	static public function revertCurrentLevel()
+	{
 		var tempCurLevel = currentLevel;
 		currentLevel = previousLevel;
 		previousLevel = tempCurLevel;
@@ -45,7 +47,7 @@ class Paths
 	public static var currentTrackedAssets:Map<String, FlxGraphic> = [];
 	public static var currentTrackedTextures:Map<String, Texture> = [];
 	public static var currentTrackedSounds:Map<String, Sound> = [];
-	
+
 	public static function excludeAsset(key:String)
 	{
 		if (!dumpExclusions.contains(key))
@@ -92,8 +94,6 @@ class Paths
 		System.gc();
 	}
 
-
-
 	// define the locally tracked assets
 	public static var localTrackedAssets:Array<String> = [];
 
@@ -120,7 +120,7 @@ class Paths
 				Assets.cache.clear(key);
 				currentTrackedSounds.remove(key);
 			}
-		}	
+		}
 		// flags everything to be cleared out next unused memory clear
 		localTrackedAssets = [];
 	}
@@ -128,10 +128,13 @@ class Paths
 	public static function returnGraphic(key:String, ?library:String, ?textureCompression:Bool = false)
 	{
 		var path = getPath('images/$key.png', IMAGE, library);
-		if (library != null) {
+		if (library != null)
+		{
 			// do dumbshit
 			return FlxG.bitmap.add(path, true, path);
-		} else {
+		}
+		else
+		{
 			if (Assets.exists(path))
 			{
 				if (!currentTrackedAssets.exists(key))
@@ -161,17 +164,19 @@ class Paths
 				return currentTrackedAssets.get(key);
 			}
 		}
-		
+
 		trace('oh no ' + key + ' is returning null NOOOO');
 		return null;
 	}
 
-	public static function returnSound(path:String, key:String, ?library:String) {
+	public static function returnSound(path:String, key:String, ?library:String)
+	{
 		// I hate this so god damn much
 		var gottenPath:String = getPath('$path/$key.$SOUND_EXT', SOUND, library);
 		gottenPath = gottenPath.substring(gottenPath.indexOf(':') + 1, gottenPath.length);
 		// trace(gottenPath);
-		if (!currentTrackedSounds.exists(gottenPath)) {
+		if (!currentTrackedSounds.exists(gottenPath))
+		{
 			if (library != null)
 				currentTrackedSounds.set(gottenPath, Assets.getSound(getPath('$path/$key.$SOUND_EXT', SOUND, library)));
 			else
@@ -182,53 +187,62 @@ class Paths
 	}
 
 	//
-	public static function getPath(file:String, type:AssetType, ?library:Null<String>) {
+	public static function getPath(file:String, type:AssetType, ?library:Null<String>)
+	{
 		if (library != null)
 			return getLibraryPath(file, type, library);
 		return getPreloadPath(file);
 	}
 
-	static public function getLibraryPath(file:String, type:AssetType, library:String = "preload") {
-		return if (library == "preload" || library == "default" || library.contains('assets')) 
-			getPreloadPath(file); 
-		else getLibraryPathForce(file, type, library);
+	static public function getLibraryPath(file:String, type:AssetType, library:String = "preload")
+	{
+		return if (library == "preload" || library == "default" || library.contains('assets')) getPreloadPath(file); else getLibraryPathForce(file, type,
+			library);
 	}
 
-	static function getLibraryPathForce(file:String, type:AssetType, library:String = 'assets') {
+	static function getLibraryPathForce(file:String, type:AssetType, library:String = 'assets')
+	{
 		var returnPath:String = '$library:$library/$file';
 		if (!Assets.exists(returnPath, type))
 			returnPath = CoolUtil.swapSpaceDash(returnPath);
 		return returnPath;
 	}
 
-	static public function shader(name:String) {
+	static public function shader(name:String)
+	{
 		return Assets.getText('assets/shaders/$name.frag');
 	}
 
-	static function getPreloadPath(file:String) {
+	static function getPreloadPath(file:String)
+	{
 		var returnPath:String = '$currentLevel/$file';
 		if (!Assets.exists(returnPath))
 			returnPath = CoolUtil.swapSpaceDash(returnPath);
 		return returnPath;
 	}
 
-	static public function file(file:String, type:AssetType = TEXT, ?library:String) {
+	static public function file(file:String, type:AssetType = TEXT, ?library:String)
+	{
 		return getPath(file, type, library);
 	}
 
-	static public function txt(key:String, ?library:String) {
+	static public function txt(key:String, ?library:String)
+	{
 		return getPath('$key.txt', TEXT, library);
 	}
 
-	static public function video(key:String) {
+	static public function video(key:String)
+	{
 		return 'assets/cutscenes/$key.mp4';
 	}
 
-	static public function xml(key:String, ?library:String) {
+	static public function xml(key:String, ?library:String)
+	{
 		return getPath('data/$key.xml', TEXT, library);
 	}
 
-	static public function json(key:String, ?library:String) {
+	static public function json(key:String, ?library:String)
+	{
 		return getPath('songs/$key.json', TEXT, library);
 	}
 
@@ -240,42 +254,50 @@ class Paths
 	static public function songJson(song:String, secondSong:String, old:Bool, ?library:String)
 		return getPath('songs/${song.toLowerCase()}/${secondSong.toLowerCase() + (old ? '_old' : '')}.json', TEXT, library);
 
-	static public function sound(key:String, ?library:String):Dynamic {
+	static public function sound(key:String, ?library:String):Dynamic
+	{
 		var sound:Sound = returnSound('sounds', key, library);
 		return sound;
 	}
-	
-	static public function soundRandom(key:String, min:Int, max:Int, ?library:String) {
+
+	static public function soundRandom(key:String, min:Int, max:Int, ?library:String)
+	{
 		return sound(key + FlxG.random.int(min, max), library);
 	}
 
-	static public function music(key:String, ?library:String):Dynamic {
+	static public function music(key:String, ?library:String):Dynamic
+	{
 		var file:Sound = returnSound('music', key, library);
 		return file;
 	}
 
-	static public function voices(song:String, old:Bool, ?library:String):Any {
+	static public function voices(song:String, old:Bool, ?library:String):Any
+	{
 		var songKey:String = '${CoolUtil.swapSpaceDash(song.toLowerCase())}/Voices' + (old ? '_old' : '');
 		var voices = returnSound('songs', songKey, library);
 		return voices;
 	}
 
-	static public function inst(song:String, old:Bool, ?library:String):Any	{
+	static public function inst(song:String, old:Bool, ?library:String):Any
+	{
 		var songKey:String = '${CoolUtil.swapSpaceDash(song.toLowerCase())}/Inst' + (old ? '_old' : '');
 		var inst = returnSound('songs', songKey, library);
 		return inst;
 	}
 
-	static public function image(key:String, ?library:String, ?textureCompression:Bool = false) {
+	static public function image(key:String, ?library:String, ?textureCompression:Bool = false)
+	{
 		var returnAsset:FlxGraphic = returnGraphic(key, library, textureCompression);
 		return returnAsset;
 	}
 
-	static public function font(key:String) {
+	static public function font(key:String)
+	{
 		return 'assets/fonts/$key';
 	}
 
-	static public function getSparrowAtlas(key:String, ?compression:Bool = false, ?library:String) {
+	static public function getSparrowAtlas(key:String, ?compression:Bool = false, ?library:String)
+	{
 		var graphic:FlxGraphic = returnGraphic(key, library, compression);
 		var fileContents;
 		if (library == null)

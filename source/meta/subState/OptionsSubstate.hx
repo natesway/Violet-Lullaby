@@ -98,7 +98,8 @@ class OptionsSubstate extends MusicBeatSubState
 
 		var arrayTemp:Array<String> = [];
 		// re-sort everything according to the list numbers
-		for (controlString in Init.gameControls.keys()) {
+		for (controlString in Init.gameControls.keys())
+		{
 			arrayTemp[Init.gameControls.get(controlString)[1]] = controlString;
 		}
 		arrayTemp.push("EDIT OFFSET"); // append edit offset to the end of the array
@@ -172,7 +173,7 @@ class OptionsSubstate extends MusicBeatSubState
 
 	private function updateSelection(equal:Int = 0)
 	{
-		if (equal != curSelection) 
+		if (equal != curSelection)
 			FlxG.sound.play(Paths.sound('scrollMenu'));
 		var prevSelection:Int = curSelection;
 		curSelection = equal;
@@ -297,7 +298,7 @@ class OptionsSubstate extends MusicBeatSubState
 		Init.saveSettings(); // for offset
 		super.close();
 	}
-	
+
 	private var submenu:FlxSprite;
 
 	private function openSubmenu()
@@ -336,16 +337,16 @@ class OptionsSubstate extends MusicBeatSubState
 
 				// check if any keys use the same key lol
 				/*
-				for (i in 0...otherKeys.members.length)	{
-					if (otherKeys.members[i].text == checkKey.toString())
-					{
-						// switch them I guess???
-						var oldKey = Init.gameControls.get(keyOptions.members[curSelection].text)[0][curHorizontalSelection];
-						Init.gameControls.get(keyOptions.members[otherKeys.members[i].controlGroupID].text)[0][otherKeys.members[i].extensionJ] = oldKey;
-						otherKeys.members[i].text = getStringKey(oldKey);
+					for (i in 0...otherKeys.members.length)	{
+						if (otherKeys.members[i].text == checkKey.toString())
+						{
+							// switch them I guess???
+							var oldKey = Init.gameControls.get(keyOptions.members[curSelection].text)[0][curHorizontalSelection];
+							Init.gameControls.get(keyOptions.members[otherKeys.members[i].controlGroupID].text)[0][otherKeys.members[i].extensionJ] = oldKey;
+							otherKeys.members[i].text = getStringKey(oldKey);
+						}
 					}
-				}
-				*/
+				 */
 
 				// now check if its the key we want to change
 				Init.gameControls.get(keyOptions.members[curSelection].text)[0][curHorizontalSelection] = checkKey;

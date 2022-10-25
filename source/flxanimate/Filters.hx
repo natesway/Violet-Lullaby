@@ -3,46 +3,52 @@ package flxanimate;
 import flixel.math.FlxMath;
 import flixel.system.FlxAssets.FlxShader;
 import openfl.utils._internal.ShaderMacro;
+
 class Filters
 {
 	public var shader(default, null):FilterShader;
 
-    public var hue(get, set):Float;
+	public var hue(get, set):Float;
 	public var saturation(get, set):Float;
 	public var lightness(get, set):Float;
 
 	public function new():Void
 	{
-			shader = new FilterShader();
-			shader.data.HSV.value = [];
-			hue = 0;
-			saturation = 0;
-			lightness = 0;
+		shader = new FilterShader();
+		shader.data.HSV.value = [];
+		hue = 0;
+		saturation = 0;
+		lightness = 0;
 	}
 
 	function get_hue()
 	{
 		return shader.data.HSV.value[0];
 	}
+
 	function set_hue(hue:Float)
 	{
 		hue %= 360;
 		shader.data.HSV.value[0] = hue;
 		return hue;
 	}
+
 	function get_saturation()
 	{
 		return (shader.data.HSV.value[1] * 100) - 100;
 	}
+
 	function set_saturation(saturation:Float)
 	{
 		shader.data.HSV.value[1] = saturation / 100;
 		return saturation;
 	}
+
 	function get_lightness()
 	{
 		return (shader.data.HSV.value[2] * 100) - 100;
 	}
+
 	function set_lightness(lightness:Float)
 	{
 		shader.data.HSV.value[2] = lightness / 100;
@@ -120,5 +126,6 @@ class FilterShader extends FlxShader
 		gl_FragColor = vec4(fragRGB, textureColor.w);
 	}
 	");
+
 	}
 }

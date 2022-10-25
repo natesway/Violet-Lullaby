@@ -20,11 +20,15 @@ class Boyfriend extends Character
 		{
 			var nameOfAnimation = '';
 			var animationFinished:Bool = false;
-			if (atlasCharacter != null) {
+			if (atlasCharacter != null)
+			{
 				nameOfAnimation = atlasAnimation;
 				animationFinished = atlasCharacter.anim.finished;
-			} else {
-				if (animation != null) {
+			}
+			else
+			{
+				if (animation != null)
+				{
 					nameOfAnimation = animation.curAnim.name;
 					animationFinished = animation.curAnim.finished;
 				}
@@ -43,5 +47,4 @@ class Boyfriend extends Character
 
 		super.update(elapsed);
 	}
-
 }

@@ -22,7 +22,8 @@ import openfl.display.BitmapData;
 import openfl.geom.ColorTransform;
 import openfl.geom.Rectangle;
 
-typedef Settings = {
+typedef Settings =
+{
 	?ButtonSettings:Map<String, flxanimate.animate.FlxAnim.ButtonSettings>,
 	?FrameRate:Float,
 	?Reversed:Bool,
@@ -40,9 +41,9 @@ class FlxAnimate extends FlxSprite
 	#if FLX_SOUND_SYSTEM
 	public var audio:FlxSound;
 	#end
-	
+
 	public var rectangle:FlxRect;
-	
+
 	public var showPivot:Bool = false;
 
 	/**
@@ -82,35 +83,40 @@ class FlxAnimate extends FlxSprite
 		anim._loadAtlas(atlasSetting(Path));
 		frames = FlxAnimateFrames.fromTextureAtlas(Path);
 	}
+
 	public override function draw():Void
 	{
 		@:privateAccess
 		parseSymbol(anim.curSymbol, _matrix, anim.curFrame, anim.symbolType, colorTransform, true);
 	}
+
 	function parseSymbol(symbol:FlxSymbol, m:FlxMatrix, FF:Int, symbolType:SymbolType, colorFilter:ColorTransform, mainSymbol:Bool)
 	{
 		switch (symbolType)
 		{
-			case button, "button": setButtonFrames(symbol);
+			case button, "button":
+				setButtonFrames(symbol);
 			case movieclip, "movieclip":
-			{
-				(anim.swfRender) ? symbol.update(anim.framerate, anim.reversed, loop) : if (symbol.curFrame != 0) symbol.curFrame = 0;
-			}
+				{
+					(anim.swfRender) ? symbol.update(anim.framerate, anim.reversed, loop) : if (symbol.curFrame != 0) symbol.curFrame = 0;
+				}
 			default:
 		}
 		var lbl:Null<String> = null;
 		for (i in 0...symbol.timeline.L.length)
 		{
 			var layer = symbol.timeline.L[symbol.timeline.L.length - 1 - i];
-			if (!symbol._layers.contains(layer.LN) && mainSymbol) continue;
+			if (!symbol._layers.contains(layer.LN) && mainSymbol)
+				continue;
 			var selectedFrame = symbol.prepareFrame(layer, ([SymbolType.graphic, "graphic"].indexOf(symbolType) != -1) ? FF : symbol.curFrame);
-			if (selectedFrame == null) continue;
+			if (selectedFrame == null)
+				continue;
 
 			if (selectedFrame.N != null)
 			{
 				symbol.labels.get(selectedFrame.N).fireCallbacks();
 			}
-			
+
 			for (element in selectedFrame.E)
 			{
 				var isSymbol = element.SI != null;
@@ -125,7 +131,7 @@ class FlxAnimate extends FlxSprite
 				if (element.SI.bitmap == null && isSymbol)
 				{
 					var symbol = anim.symbolDictionary.get(element.SI.SN);
-					parseSymbol(symbol, matrix, symbol.frameControl(element.SI.FF,element.SI.LP), element.SI.ST, colorF, false);
+					parseSymbol(symbol, matrix, symbol.frameControl(element.SI.FF, element.SI.LP), element.SI.ST, colorF, false);
 					continue;
 				}
 				var limb = frames.getByName((isSymbol) ? element.SI.bitmap.N : element.ASI.N);
@@ -137,46 +143,48 @@ class FlxAnimate extends FlxSprite
 	static function colorEffect(sInstance:ColorEffects)
 	{
 		var CT = new ColorTransform();
-		if (sInstance == null) return CT;
+		if (sInstance == null)
+			return CT;
 		switch (sInstance.M)
 		{
 			case Tint, "Tint":
-			{
-				var color = flixel.util.FlxColor.fromString(sInstance.TC);
-				var opacity = sInstance.TM;
-				CT.redMultiplier -= opacity;
-				CT.redOffset = Math.round(color.red * opacity);
-				CT.greenMultiplier -= opacity;
-				CT.greenOffset = Math.round(color.green * opacity);
-				CT.blueMultiplier -= opacity;
-				CT.blueOffset = Math.round(color.blue * opacity);
-			}
+				{
+					var color = flixel.util.FlxColor.fromString(sInstance.TC);
+					var opacity = sInstance.TM;
+					CT.redMultiplier -= opacity;
+					CT.redOffset = Math.round(color.red * opacity);
+					CT.greenMultiplier -= opacity;
+					CT.greenOffset = Math.round(color.green * opacity);
+					CT.blueMultiplier -= opacity;
+					CT.blueOffset = Math.round(color.blue * opacity);
+				}
 			case Alpha, "Alpha":
-			{
-				CT.alphaMultiplier = sInstance.AM;
-			}
+				{
+					CT.alphaMultiplier = sInstance.AM;
+				}
 			case Brightness, "Brightness":
-			{
-				CT.redMultiplier = CT.greenMultiplier = CT.blueMultiplier -= Math.abs(sInstance.BRT);
-				if (sInstance.BRT >= 0)
-					CT.redOffset = CT.greenOffset = CT.blueOffset = 255 * sInstance.BRT;
-			}
+				{
+					CT.redMultiplier = CT.greenMultiplier = CT.blueMultiplier -= Math.abs(sInstance.BRT);
+					if (sInstance.BRT >= 0)
+						CT.redOffset = CT.greenOffset = CT.blueOffset = 255 * sInstance.BRT;
+				}
 			case Advanced, "Advanced":
-			{
-				CT.redMultiplier = sInstance.RM;
-				CT.redOffset = sInstance.RO;
-				CT.greenMultiplier = sInstance.GM;
-				CT.greenOffset = sInstance.GO;
-				CT.blueMultiplier = sInstance.BM;
-				CT.blueOffset = sInstance.BO;
-				CT.alphaMultiplier = sInstance.AM;
-				CT.alphaOffset = sInstance.AO;
-			}
+				{
+					CT.redMultiplier = sInstance.RM;
+					CT.redOffset = sInstance.RO;
+					CT.greenMultiplier = sInstance.GM;
+					CT.greenOffset = sInstance.GO;
+					CT.blueMultiplier = sInstance.BM;
+					CT.blueOffset = sInstance.BO;
+					CT.alphaMultiplier = sInstance.AM;
+					CT.alphaOffset = sInstance.AO;
+				}
 		}
 		return CT;
 	}
 
 	var pressed:Bool = false;
+
 	function setButtonFrames(symbol:FlxSymbol)
 	{
 		var badPress:Bool = false;
@@ -229,7 +237,11 @@ class FlxAnimate extends FlxSprite
 
 	function drawLimb(limb:FlxFrame, _matrix:FlxMatrix, colorTransform:ColorTransform)
 	{
-		if (alpha == 0 || colorTransform.alphaMultiplier == 0 || colorTransform.alphaOffset == -255 || limb == null || limb.type == EMPTY)
+		if (alpha == 0
+			|| colorTransform.alphaMultiplier == 0
+			|| colorTransform.alphaOffset == -255
+			|| limb == null
+			|| limb.type == EMPTY)
 			return;
 		for (camera in cameras)
 		{
@@ -237,13 +249,14 @@ class FlxAnimate extends FlxSprite
 				return;
 			getScreenPosition(_point, camera).subtractPoint(offset);
 			_matrix.scale(scale.x, scale.y);
-			
-			if (isPixelPerfectRender(camera)) {
-			    _point.floor();
-		    }
-			
+
+			if (isPixelPerfectRender(camera))
+			{
+				_point.floor();
+			}
+
 			_matrix.translate(_point.x, _point.y);
-			camera.drawPixels(limb, null, _matrix, colorTransform, blend, antialiasing/*, AnimationData.filters.shader*/);
+			camera.drawPixels(limb, null, _matrix, colorTransform, blend, antialiasing /*, AnimationData.filters.shader*/);
 			#if FLX_DEBUG
 			FlxBasic.visibleCount++;
 			#end
@@ -254,6 +267,7 @@ class FlxAnimate extends FlxSprite
 			drawDebug();
 		#end
 	}
+
 	function limbOnScreen(limb:FlxFrame, m:FlxMatrix, ?Camera:FlxCamera)
 	{
 		if (Camera == null)
@@ -261,8 +275,8 @@ class FlxAnimate extends FlxSprite
 
 		var minX:Float = x + m.tx - offset.x - scrollFactor.x * Camera.scroll.x;
 		var minY:Float = y + m.ty - offset.y - scrollFactor.y * Camera.scroll.y;
-		
-		var radiusX:Float =  limb.frame.width * Math.max(1, m.a);
+
+		var radiusX:Float = limb.frame.width * Math.max(1, m.a);
 		var radiusY:Float = limb.frame.height * Math.max(1, m.d);
 		var radius:Float = Math.max(radiusX, radiusY);
 		radius *= FlxMath.SQUARE_ROOT_OF_TWO;
@@ -277,9 +291,12 @@ class FlxAnimate extends FlxSprite
 
 	function checkSize(limb:FlxFrame, m:FlxMatrix)
 	{
-		return (limb != null) ? {width: limb.sourceSize.x * (Math.abs(m.a) + Math.abs(m.c)), height: limb.sourceSize.y * (Math.abs(m.d) + Math.abs(m.b))} : {width: 0, height: 0};
+		return (limb != null) ? {width: limb.sourceSize.x * (Math.abs(m.a) + Math.abs(m.c)), height: limb.sourceSize.y * (Math.abs(m.d) +
+			Math.abs(m.b))} : {width: 0, height: 0};
 	}
+
 	var oldMatrix:FlxMatrix;
+
 	override function set_flipX(Value:Bool)
 	{
 		if (oldMatrix == null)
@@ -299,6 +316,7 @@ class FlxAnimate extends FlxSprite
 		}
 		return Value;
 	}
+
 	override function set_flipY(Value:Bool)
 	{
 		if (oldMatrix == null)
@@ -319,8 +337,8 @@ class FlxAnimate extends FlxSprite
 		return Value;
 	}
 
-	override function destroy()      
-	{                                                                
+	override function destroy()
+	{
 		if (anim != null)
 			anim.destroy();
 		anim = null;
@@ -331,15 +349,15 @@ class FlxAnimate extends FlxSprite
 		super.destroy();
 	}
 
-	public override function updateAnimation(elapsed:Float) 
+	public override function updateAnimation(elapsed:Float)
 	{
 		anim.update(elapsed);
 	}
 
-	public function setButtonPack(button:String, callbacks:ClickStuff #if FLX_SOUND_SYSTEM , sound:FlxSound #end):Void
+	public function setButtonPack(button:String, callbacks:ClickStuff #if FLX_SOUND_SYSTEM, sound:FlxSound #end):Void
 	{
 		@:privateAccess
-		anim.buttonMap.set(button, {Callbacks: callbacks, #if FLX_SOUND_SYSTEM Sound:  sound #end});
+		anim.buttonMap.set(button, {Callbacks: callbacks, #if FLX_SOUND_SYSTEM Sound: sound #end});
 	}
 
 	function setTheSettings(?Settings:Settings):Void
@@ -377,7 +395,7 @@ class FlxAnimate extends FlxSprite
 		if (haxe.io.Path.extension(Path) == "zip")
 		{
 			var thing = Zip.readZip(Assets.getBytes(Path));
-			
+
 			for (list in Zip.unzip(thing))
 			{
 				if (list.fileName.indexOf("Animation.json") != -1)

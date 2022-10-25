@@ -86,7 +86,17 @@ class Main extends Sprite
 		['Safety-Lullaby', 'Left-Unchecked', 'Lost-Cause'],
 		['Frostbite', 'Insomnia', 'Monochrome'],
 		['Missingno', 'Brimstone'],
-		['Amusia', 'Dissension', 'Purin', 'Death-Toll', 'Isotope', 'Bygone-Purpose', 'Pasta-Night', 'Shinto', 'Shitno']
+		[
+			'Amusia',
+			'Dissension',
+			'Purin',
+			'Death-Toll',
+			'Isotope',
+			'Bygone-Purpose',
+			'Pasta-Night',
+			'Shinto',
+			'Shitno'
+		]
 	];
 
 	// most of these variables are just from the base game!
@@ -126,7 +136,7 @@ class Main extends Sprite
 		SUtil.check();
 
 		FlxTransitionableState.skipNextTransIn = true;
-		
+
 		// here we set up the base game
 		addChild(new FlxGame(gameWidth, gameHeight, mainClassState, zoom, framerate, framerate, skipSplash));
 
@@ -162,14 +172,15 @@ class Main extends Sprite
 		if (!FlxTransitionableState.skipNextTransIn)
 		{
 			curState.openSubState(new FNFTransition(0.35, false));
-			FNFTransition.finishCallback = function() {
+			FNFTransition.finishCallback = function()
+			{
 				FlxG.switchState(target);
 			};
 			return trace('changed state');
 		}
 		FlxTransitionableState.skipNextTransIn = false;
 		// load the state
-		FlxG.switchState(target);		
+		FlxG.switchState(target);
 	}
 
 	public static function updateFramerate(newFramerate:Int)

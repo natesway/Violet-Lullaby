@@ -56,7 +56,12 @@ class Init extends FlxState
 			'Whether to display approximately how much memory is being used.',
 			NOT_FORCED
 		],
-		'Debug Info' => [false, Checkmark, 'Whether to display information like your game state.', NOT_FORCED],
+		'Debug Info' => [
+			false,
+			Checkmark,
+			'Whether to display information like your game state.',
+			NOT_FORCED
+		],
 		'Reduced Movements' => [
 			false,
 			Checkmark,
@@ -130,12 +135,28 @@ class Init extends FlxState
 			NOT_FORCED,
 			['pussy', 'normal', 'hell']
 		],
-		"Clip Style" => ['stepmania', Selector, "Chooses a style for hold note clippings; StepMania: Holds under Receptors; FNF: Holds over receptors", NOT_FORCED, 
-			['StepMania', 'FNF']],
-		"UI Skin" => ['default', Selector, 'Choose a UI Skin for judgements, combo, etc.', NOT_FORCED, ''],
+		"Clip Style" => [
+			'stepmania',
+			Selector,
+			"Chooses a style for hold note clippings; StepMania: Holds under Receptors; FNF: Holds over receptors",
+			NOT_FORCED,
+			['StepMania', 'FNF']
+		],
+		"UI Skin" => [
+			'default',
+			Selector,
+			'Choose a UI Skin for judgements, combo, etc.',
+			NOT_FORCED,
+			''
+		],
 		"Note Skin" => ['default', Selector, 'Choose a note skin.', NOT_FORCED, ''],
 		"Framerate Cap" => [120, Selector, 'Define your maximum FPS.', NOT_FORCED, ['']],
-		"Opaque Arrows" => [false, Checkmark, "Makes the arrows at the top of the screen opaque again.", NOT_FORCED],
+		"Opaque Arrows" => [
+			false,
+			Checkmark,
+			"Makes the arrows at the top of the screen opaque again.",
+			NOT_FORCED
+		],
 		"Opaque Holds" => [false, Checkmark, "Huh, why isnt the trail cut off?", NOT_FORCED],
 		'Ghost Tapping' => [
 			true,
@@ -160,7 +181,7 @@ class Init extends FlxState
 		'Fixed Judgements' => [
 			false,
 			Checkmark,
-			"Fixes the judgements to the camera instead of to the world itself, making them easier to read.", 
+			"Fixes the judgements to the camera instead of to the world itself, making them easier to read.",
 			NOT_FORCED
 		],
 		'Simply Judgements' => [
@@ -169,8 +190,6 @@ class Init extends FlxState
 			"Simplifies the judgement animations, displaying only one judgement / rating sprite at a time.",
 			NOT_FORCED
 		],
-
-
 	];
 
 	public static var trueSettings:Map<String, Dynamic> = [];
@@ -231,26 +250,26 @@ class Init extends FlxState
 		#end
 
 		/*
-		for (i in pathsArray) {
-			var singularArray:Array<String> = i.split('/');
-			@:privateAccess
-			var path = getPreviousPath(singularArray[0], singularArray[1], singularArray[2]) + singularArray[3] + '.sol';
-			if (FileSystem.exists(path))
-			{
-				for (i in pathsArray)
+			for (i in pathsArray) {
+				var singularArray:Array<String> = i.split('/');
+				@:privateAccess
+				var path = getPreviousPath(singularArray[0], singularArray[1], singularArray[2]) + singularArray[3] + '.sol';
+				if (FileSystem.exists(path))
 				{
-					var singularArray:Array<String> = i.split('/');
-					var directory:String = getPreviousPath(singularArray[0], singularArray[1], singularArray[2]);
-					var trimmedDirectory:String = directory.substring(0, directory.indexOf('/${singularArray[2]}'));
-					FileSystem.createDirectory(trimmedDirectory);
-					trace('directory $i lmfao');
+					for (i in pathsArray)
+					{
+						var singularArray:Array<String> = i.split('/');
+						var directory:String = getPreviousPath(singularArray[0], singularArray[1], singularArray[2]);
+						var trimmedDirectory:String = directory.substring(0, directory.indexOf('/${singularArray[2]}'));
+						FileSystem.createDirectory(trimmedDirectory);
+						trace('directory $i lmfao');
 
-					var name:String = singularArray[3].replace('\\', '');
-					File.saveContent(directory + name + '.sol', 'yeah');
+						var name:String = singularArray[3].replace('\\', '');
+						File.saveContent(directory + name + '.sol', 'yeah');
+					}
 				}
 			}
-		}
-		*/
+		 */
 
 		FlxG.save.bind('lullabyv2', 'hypno');
 		Highscore.load();
@@ -268,21 +287,24 @@ class Init extends FlxState
 		FlxG.mouse.useSystemCursor = true; // Use system cursor because it's prettier
 		FlxG.mouse.visible = false; // Hide mouse on start
 		// FlxGraphic.defaultPersist = true; // make sure we control all of the memory
-		
+
 		gotoTitleScreen();
 	}
 
-	private static function getPreviousPath(company:String, file:String, localPath:String):String {
+	private static function getPreviousPath(company:String, file:String, localPath:String):String
+	{
 		@:privateAccess
 		var path = NativeCFFI.lime_system_get_directory(1, company, file) + "/" + localPath + "/";
 		return path;
 	}
 
-	private function gotoTitleScreen() {	
+	private function gotoTitleScreen()
+	{
 		Main.switchState(this, new DisclaimerState());
 	}
 
-	public static function loadSettings():Void {
+	public static function loadSettings():Void
+	{
 		// set the true settings array
 		// only the first variable will be saved! the rest are for the menu stuffs
 

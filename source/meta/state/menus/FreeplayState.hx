@@ -70,7 +70,8 @@ class FreeplayState extends MusicBeatState
 		{
 			if (!existingSongs.contains(i.toLowerCase()))
 			{
-				for (j in 0...2) {
+				for (j in 0...2)
+				{
 					var old:Bool = j == 0 ? true : false;
 					var icon:String = 'gf';
 					var chartExists:Bool = Assets.exists(Paths.songJson(i, i, old));
@@ -80,7 +81,6 @@ class FreeplayState extends MusicBeatState
 						icon = (castSong != null) ? castSong.player2 : 'gf';
 						addSong(CoolUtil.spaceToDash(castSong.song), 1, (i == 'pasta-night') ? 'hypno-cards' : icon, old, FlxColor.WHITE);
 					}
-
 				}
 			}
 		}
@@ -100,7 +100,7 @@ class FreeplayState extends MusicBeatState
 
 		for (i in 0...songs.length)
 		{
-			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i].songName + (songs[i].old ? ' LEGACY':''), true, false);
+			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i].songName + (songs[i].old ? ' LEGACY' : ''), true, false);
 			songText.isMenuItem = true;
 			songText.targetY = i;
 			grpSongs.add(songText);
@@ -355,6 +355,7 @@ class FreeplayState extends MusicBeatState
 class SongMetadata
 {
 	public static var nameToData:Map<String, SongMetadata> = [];
+
 	public var songName:String = "";
 	public var week:Int = 0;
 	public var songCharacter:String = "";
@@ -365,7 +366,7 @@ class SongMetadata
 	public function new(song:String, week:Int, songCharacter:String, library:String, old:Bool, songColor:FlxColor)
 	{
 		this.songName = song;
-		nameToData.set(songName+(old ? "-old" : ""), this);
+		nameToData.set(songName + (old ? "-old" : ""), this);
 		this.old = old;
 		this.week = week;
 		this.songCharacter = songCharacter;

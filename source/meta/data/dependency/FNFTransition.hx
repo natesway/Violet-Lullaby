@@ -88,7 +88,7 @@ class FNFTransition extends MusicBeatSubState
 		transGradient.cameras = [camera];
 
 		super.update(elapsed);
-		
+
 		if (isTransIn)
 			transBlack.y = transGradient.y + transGradient.height;
 		else

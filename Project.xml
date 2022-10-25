@@ -29,7 +29,12 @@
 	<set name="BUILD_DIR" value="export/release" unless="debug" />
 
 	<source path="source" />
+
+	<!-- to be able to not have the mobile assets in another builds -saw -->
+	<assets path="mobile" rename="assets/mobile" if="mobile" />
+
 	<assets path="assets" />
+
 	<assets path="shitpost" library="shitpost" embed="true" />
 	<assets path="FE-CrashDialog.exe" type="template" if="windows release" />
 

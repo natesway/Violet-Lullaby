@@ -20,7 +20,9 @@ import flixel.util.FlxTimer;
 import meta.MusicBeat.MusicBeatState;
 import meta.data.Highscore;
 import meta.data.Song;
+#if DISCORD_ALLOWED
 import meta.data.dependency.Discord;
+#end
 import meta.data.font.Alphabet;
 import meta.subState.UnlockSubstate;
 
@@ -73,7 +75,9 @@ class MainMenuState extends MusicBeatState
 		super.create();
 
 		ForeverTools.resetMenuMusic();
+		#if DISCORD_ALLOWED
 		Discord.changePresence('MAIN MENU', 'Main Menu');
+		#end
 
 		// POKEMON YELLOW LOL
 		backdrop = new FlxBackdrop(Paths.image('menus/menu/pokemon_yellow_noise'), 1, 1, true, true, 1, 1);

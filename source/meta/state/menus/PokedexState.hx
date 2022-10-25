@@ -2,6 +2,7 @@ package meta.state.menus;
 
 import openfl.display.GraphicsShader;
 import openfl.filters.ShaderFilter;
+import openfl.utils.Assets;
 import flixel.util.FlxSort;
 import flixel.tweens.FlxTween;
 import flixel.FlxG;
@@ -9,8 +10,6 @@ import flixel.FlxSprite;
 import flixel.math.FlxPoint;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
-import sys.FileSystem;
-import sys.io.File;
 import flixel.util.FlxColor;
 import haxe.Json;
 import meta.MusicBeat.MusicBeatState;
@@ -35,8 +34,7 @@ typedef PokeData = {
 class PokedexState extends MusicBeatState {
 
     var dexArray:Array<PokeData> = [];
-    var folderList:Array<String> = CoolUtil.returnAssetsLibrary('images/pokedex', 'assets');
-    
+
     var pokemonSprites:FlxTypedGroup<FlxSprite>;
     //var pokemonNameBoxes:FlxTypedGroup<FlxSprite>;
     var pokemonNames:FlxTypedGroup<FlxText>;
@@ -143,11 +141,11 @@ class PokedexState extends MusicBeatState {
 				}
 		}
 
-        for (i in folderList) {
+        for (i in CoolUtil.returnAssetsLibrary('images/pokedex', 'assets')) {
             trace('found folder: ' + i);
-            if (FileSystem.exists(Paths.getPath('images/pokedex/${i}/info.json', TEXT))) 
+            if (Assets.exists(Paths.getPath('images/pokedex/${i}/info.json', TEXT))) 
             {
-                var rawJson = File.getContent(Paths.getPath('images/pokedex/${i}/info.json', TEXT));
+                var rawJson = Assets.getText(Paths.getPath('images/pokedex/${i}/info.json', TEXT));
                 var swagShit:PokeData = cast Json.parse(rawJson).info;
 
                 dexArray.push(swagShit);
@@ -168,10 +166,9 @@ class PokedexState extends MusicBeatState {
                 var daPoke:String = dexArray[i].name;
 
                 trace('found folder: ' + daPoke);
-                if (FileSystem.exists(Paths.getPath('images/pokedex/'+ daPoke + '/info.json', TEXT))) {
-                    var rawJson = File.getContent(Paths.getPath('images/pokedex/' + daPoke + '/info.json', TEXT));
+                if (Assets.exists(Paths.getPath('images/pokedex/'+ daPoke + '/info.json', TEXT))) {
+                    var rawJson = Assets.getText(Paths.getPath('images/pokedex/' + daPoke + '/info.json', TEXT));
                     var swagShit:PokeData = cast Json.parse(rawJson).info;
-
                     var newOffset:Offsets = cast Json.parse(rawJson).info.offset;
     
                     var char = new FlxSprite().loadGraphic(Paths.image('pokedex/' + daPoke + '/char'));

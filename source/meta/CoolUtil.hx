@@ -1,14 +1,11 @@
 package meta;
 
 import flixel.math.FlxMath;
-import lime.utils.Assets;
+import openfl.utils.Assets;
 import meta.state.PlayState;
+import sys.FileSystem;
 
 using StringTools;
-
-#if !html5
-import sys.FileSystem;
-#end
 
 class CoolUtil
 {
@@ -68,16 +65,13 @@ class CoolUtil
 
 	public static function returnAssetsLibrary(library:String, ?subDir:String = 'assets/images'):Array<String>
 	{
-		//
 		var libraryArray:Array<String> = [];
-		var unfilteredLibrary = FileSystem.readDirectory('$subDir/$library');
 
-		for (folder in unfilteredLibrary)
+		for (folder in FileSystem.readDirectory('$subDir/$library'))
 		{
 			if (!folder.contains('.'))
 				libraryArray.push(folder);
 		}
-		trace(libraryArray);
 
 		return libraryArray;
 	}

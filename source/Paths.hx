@@ -6,16 +6,13 @@ package;
 import flixel.FlxG;
 import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
-import lime.utils.Assets;
 import meta.CoolUtil;
 import openfl.display.BitmapData;
 import openfl.display3D.textures.Texture;
 import openfl.media.Sound;
 import openfl.system.System;
 import openfl.utils.AssetType;
-import openfl.utils.Assets as OpenFlAssets;
-import sys.FileSystem;
-import sys.io.File;
+import openfl.utils.Assets;
 
 using StringTools;
 
@@ -135,7 +132,7 @@ class Paths
 			// do dumbshit
 			return FlxG.bitmap.add(path, true, path);
 		} else {
-			if (FileSystem.exists(path))
+			if (Assets.exists(path))
 			{
 				if (!currentTrackedAssets.exists(key))
 				{
@@ -176,7 +173,7 @@ class Paths
 		// trace(gottenPath);
 		if (!currentTrackedSounds.exists(gottenPath)) {
 			if (library != null)
-				currentTrackedSounds.set(gottenPath, OpenFlAssets.getSound(getPath('$path/$key.$SOUND_EXT', SOUND, library)));
+				currentTrackedSounds.set(gottenPath, Assets.getSound(getPath('$path/$key.$SOUND_EXT', SOUND, library)));
 			else
 				currentTrackedSounds.set(gottenPath, Sound.fromFile('./' + gottenPath));
 		}
@@ -199,18 +196,18 @@ class Paths
 
 	static function getLibraryPathForce(file:String, type:AssetType, library:String = 'assets') {
 		var returnPath:String = '$library:$library/$file';
-		if (!OpenFlAssets.exists(returnPath, type))
+		if (!Assets.exists(returnPath, type))
 			returnPath = CoolUtil.swapSpaceDash(returnPath);
 		return returnPath;
 	}
 
 	static public function shader(name:String) {
-		return File.getContent('./assets/shaders/$name.frag');
+		return Assets.getText('assets/shaders/$name.frag');
 	}
 
 	static function getPreloadPath(file:String) {
 		var returnPath:String = '$currentLevel/$file';
-		if (!FileSystem.exists(returnPath))
+		if (!Assets.exists(returnPath))
 			returnPath = CoolUtil.swapSpaceDash(returnPath);
 		return returnPath;
 	}
@@ -282,7 +279,7 @@ class Paths
 		var graphic:FlxGraphic = returnGraphic(key, library, compression);
 		var fileContents;
 		if (library == null)
-			fileContents = File.getContent(file('images/$key.xml', library));
+			fileContents = Assets.getText(file('images/$key.xml', library));
 		else
 			fileContents = Assets.getText(file('images/$key.xml', library));
 		return (FlxAtlasFrames.fromSparrow(graphic, fileContents));

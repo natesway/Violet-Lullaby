@@ -11,7 +11,9 @@ import flixel.util.FlxTimer;
 import gameObjects.userInterface.menu.Checkmark;
 import gameObjects.userInterface.menu.Selector;
 import meta.MusicBeat.MusicBeatState;
+#if DISCORD_ALLOWED
 import meta.data.dependency.Discord;
+#end
 import meta.data.dependency.FNFSprite;
 import meta.data.font.Alphabet;
 import meta.subState.OptionsSubstate;
@@ -45,7 +47,7 @@ class OptionsMenuState extends MusicBeatState
 
 		// NOTE : Make sure to check Init.hx if you are trying to add options.
 
-		#if !html5
+		#if DISCORD_ALLOWED
 		Discord.changePresence('OPTIONS MENU', 'Main Menu');
 		#end
 
@@ -442,7 +444,6 @@ class OptionsMenuState extends MusicBeatState
 						});
 					}
 				case Init.SettingTypes.Selector:
-					#if !html5
 					var selector:Selector = currentAttachmentMap.get(activeSubgroup.members[curSelection]);
 
 					if (!controls.UI_LEFT)
@@ -454,7 +455,6 @@ class OptionsMenuState extends MusicBeatState
 						updateSelector(selector, 1);
 					else if (controls.UI_LEFT_P)
 						updateSelector(selector, -1);
-					#end
 				default:
 					// none
 			}

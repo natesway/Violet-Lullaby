@@ -23,12 +23,6 @@ import meta.state.menus.*;
 import openfl.media.Sound;
 import openfl.utils.Assets;
 
-#if sys
-import sys.FileSystem;
-#end
-
-import vlc.MP4Handler;
-
 class GameOverSubstate extends MusicBeatSubState
 {
 	//
@@ -577,7 +571,7 @@ class GameOverSubstate extends MusicBeatSubState
 						bg.antialiasing = true;
 
 
-						var video:MP4Handler = new MP4Handler();
+						var video:VideoHandler = new VideoHandler();
 						video.playVideo(Paths.video('feraligatr'));
 						video.finishCallback = function()
 						{
@@ -590,7 +584,11 @@ class GameOverSubstate extends MusicBeatSubState
 	
 						deathEnd = function()
 						{
-							if (video != null) video.finishVideo();
+							if (video != null)
+							{
+								@:privateAccess
+								video.onVLCComplete();
+							}
 							FlxTween.tween(bg, {alpha: 0}, timeBeforeEnd, {ease: FlxEase.linear});
 
 							onEnd = function()
@@ -604,9 +602,13 @@ class GameOverSubstate extends MusicBeatSubState
 						};
 
 						escapeFunction = function ()
+						{
+							if (video != null)
 							{
-								if (video != null) video.finishVideo();
+								@:privateAccess
+								video.onVLCComplete();
 							}
+						}
 					} 
 				else if (PlayState.SONG.song.toLowerCase() == "monochrome") {
 					deathSoundName = '';

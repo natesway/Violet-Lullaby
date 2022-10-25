@@ -12,7 +12,9 @@ import gameObjects.Character;
 import meta.MusicBeat.MusicBeatState;
 import meta.data.Highscore;
 import meta.data.Song;
+#if DISCORD_ALLOWED
 import meta.data.dependency.Discord;
+#end
 import overworld.OverworldStage;
 
 using StringTools;
@@ -49,8 +51,9 @@ class StoryMenuState extends MusicBeatState {
         super.create();
 
 		// "Simply use setProperty()" - BAnims
-
+		#if DISCORD_ALLOWED
 		Discord.changePresence('STORY MODE', 'Main Menu');
+		#end
 		ForeverTools.resetMenuMusic(true);
 
         gameboy = new FlxSprite();

@@ -24,7 +24,9 @@ import flixel.util.FlxTimer;
 import lime.app.Application;
 import meta.MusicBeat.MusicBeatState;
 import meta.data.*;
+#if DISCORD_ALLOWED
 import meta.data.dependency.Discord;
+#end
 import meta.data.font.Alphabet;
 import meta.state.menus.*;
 import openfl.Assets;
@@ -75,10 +77,10 @@ class TitleState extends MusicBeatState
 	{
 		if (!initialized)
 		{
-			///*
-			Discord.changePresence('TITLE SCREEN', 'Main Menu');
-			
 			ForeverTools.resetMenuMusic(true);
+			#if DISCORD_ALLOWED
+			Discord.changePresence('TITLE SCREEN', 'Main Menu');
+			#end
 		}
 
 		persistentUpdate = true;

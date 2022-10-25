@@ -4,8 +4,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
-import openfl.utils.Assets as OpenFlAssets;
-import sys.FileSystem;
+import openfl.utils.Assets;
 
 using StringTools;
 
@@ -67,7 +66,7 @@ class HealthIcon extends FlxSprite
 				trimmedCharacter = trimmedCharacter.substring(0, trimmedCharacter.indexOf('-'));
 
 			var iconPath = char;
-			while (!FileSystem.exists(Paths.getPath('images/icons/icon-' + iconPath + '.png', IMAGE)))
+			if (!Assets.exists(Paths.getPath('images/icons/icon-' + iconPath + '.png', IMAGE)))
 			{
 				if (iconPath != trimmedCharacter)
 					iconPath = trimmedCharacter;
@@ -104,14 +103,12 @@ class HealthIcon extends FlxSprite
 					updateHitbox();
 
 				case 'gold':
-					var file:FlxAtlasFrames = Paths.getSparrowAtlas('icons/Gold Health Icon');
-					frames = file;
+					frames = Paths.getSparrowAtlas('icons/Gold Health Icon');
 					animation.addByPrefix(char, 'Gold Icon', 24, true);
 					animation.play(char);
 					offsetY = -12;
 				case 'missingno':
-					var file:FlxAtlasFrames = Paths.getSparrowAtlas('icons/MissingnoIcons');
-					frames = file;
+					frames = Paths.getSparrowAtlas('icons/MissingnoIcons');
 					animation.addByPrefix(char, 'missingno icons', 0, true);
 					animation.play(char);
 					offsetX = 24;

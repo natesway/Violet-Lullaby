@@ -27,15 +27,16 @@ import meta.MusicBeat.MusicBeatState;
 import meta.data.Conductor;
 import meta.data.Highscore;
 import meta.data.Song;
+#if DISCORD_ALLOWED
 import meta.data.dependency.Discord;
+#end
 import meta.data.font.Alphabet;
 import meta.state.menus.FreeplayState;
 import meta.subState.UnlockSubstate.LockSprite;
 import openfl.display.GraphicsShader;
 import openfl.events.MouseEvent;
 import openfl.filters.ShaderFilter;
-import sys.FileSystem;
-import sys.io.File;
+import openfl.utils.Assets;
 import sys.thread.Mutex;
 import sys.thread.Thread;
 
@@ -68,7 +69,6 @@ class ShopState extends MusicBeatState
 {
 	// SHOP RELATED VARIABLES
 	var itemArray:Array<ShopItem> = [];
-	var folderList:Array<String> = CoolUtil.returnAssetsLibrary('images/shop', 'assets');
 	var itemSprites:FlxTypedSpriteGroup<FlxSprite>;
 	var itemPrices:FlxTypedSpriteGroup<FlxText>;
 	var itemsCreated:Int = 0;
@@ -146,12 +146,14 @@ class ShopState extends MusicBeatState
 	{
 		super.create();
 
+		#if DISCORD_ALLOWED
 		if (!freeplaySelected)
 			Discord.changePresence('BROWSING THE SHOP', 'Freeplay Menu');
 		else
 			Discord.changePresence('CHOOSING A SONG', 'Freeplay Menu');
+		#end
 
-		var rawJson = File.getContent(Paths.getPath('images/shop/shopText.json', TEXT)).trim();
+		var rawJson = Assets.getText(Paths.getPath('images/shop/shopText.json', TEXT)).trim();
 		while (!rawJson.endsWith("}"))
 			rawJson = rawJson.substr(0, rawJson.length - 1);
 		shopLines = cast Json.parse(rawJson).shopLines;
@@ -305,13 +307,12 @@ class ShopState extends MusicBeatState
 
 		// my DUMBASS doesnt know how to sort arrays. so i just put a number in the folder name first if somebody can help that woud be awesome im so sorry - sector : - (
 
-		for (i in folderList)
+		for (i in CoolUtil.returnAssetsLibrary('images/shop', 'assets'))
 		{
 			trace('found folder: ' + i);
-			if (FileSystem.exists(Paths.getPath('images/shop/${i}/${i}.json', TEXT)))
+			if (Assets.exists(Paths.getPath('images/shop/${i}/${i}.json', TEXT)))
 			{
-				var rawJson = File.getContent(Paths.getPath('images/shop/${i}/${i}.json', TEXT));
-				var swagShit:ShopItem = cast Json.parse(rawJson).itemDetail;
+				var swagShit:ShopItem = cast Json.parse(Assets.getText(Paths.getPath('images/shop/${i}/${i}.json', TEXT))).itemDetail;
 				itemArray.push(swagShit);
 
 				trace('images/shop/${i}/item');
@@ -611,7 +612,7 @@ class ShopState extends MusicBeatState
 		{
 			var old:Bool = j == 0 ? true : false;
 			var icon:String = 'gf';
-			var chartExists:Bool = FileSystem.exists(Paths.songJson(i, i + '-hard', old, library));
+			var chartExists:Bool = Assets.exists(Paths.songJson(i, i + '-hard', old, library));
 			if (library != null)
 				chartExists = openfl.utils.Assets.exists(Paths.songJson(i, i + '-hard', old, library), TEXT);
 			if (chartExists)
@@ -730,14 +731,18 @@ class ShopState extends MusicBeatState
 			if (left && freeplaySelected)
 			{
 				freeplaySelected = false;
+				#if DISCORD_ALLOWED
 				Discord.changePresence('BROWSING THE SHOP', 'Freeplay Menu');
+				#end
 				shopSign.animation.play('signThing', true);
 				shuffleCartridgeIdle(true);
 				cartridgePlayIdle(true);
 			}
 			if (right && !freeplaySelected)
 			{
+				#if DISCORD_ALLOWED
 				Discord.changePresence('CHOOSING A SONG', 'Freeplay Menu');
+				#end
 				freeplaySelected = true;
 			}
 		}
@@ -1584,7 +1589,7 @@ class ShopState extends MusicBeatState
 						if (portrait != null && portrait != curPortrait)
 						{
 							//  get the new portrait
-							if (!FileSystem.exists(Paths.getPath('images/menus/freeplay/$portrait.png', IMAGE)))
+							if (!Assets.exists(Paths.getPath('images/menus/freeplay/$portrait.png', IMAGE)))
 								portrait = 'unknown';
 							mutex.acquire();
 							switchingPortraits = true;

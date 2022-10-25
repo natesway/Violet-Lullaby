@@ -59,14 +59,9 @@ import openfl.filters.BitmapFilter;
 import openfl.filters.ShaderFilter;
 import openfl.media.Sound;
 import openfl.utils.Assets;
-import sys.io.File;
+#if DISCORD_ALLOWED
 import meta.data.dependency.Discord;
-
-#if sys
-import sys.FileSystem;
 #end
-
-import vlc.MP4Handler;
 
 using StringTools;
 
@@ -818,7 +813,7 @@ class PlayState extends MusicBeatState
 		dialogueHUD.bgColor.alpha = 0;
 		FlxG.cameras.add(dialogueHUD);
 
-		if (sys.FileSystem.exists(Paths.songJson(SONG.song.toLowerCase(), 'lyrics', false))) {
+		if (Assets.exists(Paths.songJson(SONG.song.toLowerCase(), 'lyrics', false))) {
 			trace('ly rics');
 			var myLyrics:Array<LyricMeasure> = Lyrics.parseLyrics(SONG.song.toLowerCase());
 			var lyrics:Lyrics = new Lyrics(myLyrics);
@@ -3138,9 +3133,11 @@ class PlayState extends MusicBeatState
 
 	public static function updateRPC(pausedRPC:Bool)
 	{
+		#if DISCORD_ALLOWED
 		var displayRPC:String = (pausedRPC) ? detailsPausedText : songDetails;
 		if (health > 0)
 			Discord.changePresence(displayRPC, detailsSub, iconRPC);
+		#end
 	}
 
 	var animationsPlay:Array<Note> = [];
@@ -3364,18 +3361,14 @@ class PlayState extends MusicBeatState
 		if (!paused)
 		{
 			songMusic.play();
-			#if !html5
 			songMusic.onComplete = doMoneyBag;
 			vocals.play();
-
-			// resyncVocals();
 
 			// Song duration in a float, useful for the time left feature
 			songLength = songMusic.length;
 
 			// Updating Discord Rich Presence (with Time Left)
 			updateRPC(false);
-			#end
 		}
 	}
 
@@ -3477,7 +3470,7 @@ class PlayState extends MusicBeatState
 
 		// generate the chart
 		unspawnNotes = ChartLoader.generateChartType(SONG, determinedChartType, this);
-		if (sys.FileSystem.exists(Paths.songJson(SONG.song.toLowerCase(), 'events', old))) {
+		if (Assets.exists(Paths.songJson(SONG.song.toLowerCase(), 'events', old))) {
 			trace('events found');
 			var eventJson:SwagSong = Song.loadFromJson('events'+(old ? '_old' : ''), SONG.song.toLowerCase(), old);
 			if (eventJson != null)

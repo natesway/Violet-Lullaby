@@ -4,7 +4,6 @@ import flixel.FlxG;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import meta.MusicBeat.MusicBeatState;
-import sys.io.File;
 
 class ShaderState extends MusicBeatState {
     override public function create() {

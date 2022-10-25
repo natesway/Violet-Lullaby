@@ -69,8 +69,8 @@ class CoolUtil
 		{
 			// simulating da FileSystem.readDirectory?
 			var daFolder:String = folder.replace('$subDir/$library', '');
-			daFolder.split(daFolder.substring(daFolder.indexOf('/'), daFolder.length)).join(''); // fancy
-			if (!daFolder.startsWith('.'))
+			daFolder.replace(daFolder.substring(daFolder.indexOf('/'), daFolder.length), ''); // fancy
+			if (!daFolder.startsWith('.') && !libraryArray.contains(daFolder))
 				libraryArray.push(daFolder);
 		}
 

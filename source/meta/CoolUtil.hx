@@ -52,9 +52,7 @@ class CoolUtil
 
 	public static function getOffsetsFromTxt(path:String):Array<Array<String>>
 	{
-		var fullText:String = Assets.getText(path);
-
-		var firstArray:Array<String> = fullText.split('\n');
+		var firstArray:Array<String> = Assets.getText(path).split('\n');
 		var swagOffsets:Array<Array<String>> = [];
 
 		for (i in firstArray)
@@ -67,10 +65,13 @@ class CoolUtil
 	{
 		var libraryArray:Array<String> = [];
 
-		for (folder in FileSystem.readDirectory('$subDir/$library'))
+		for (folder in Assets.list().filter(files -> files.contains('$subDir/$library')))
 		{
-			if (!folder.contains('.'))
-				libraryArray.push(folder);
+			// simulating da FileSystem.readDirectory?
+			var daFolder:String = folder.replace('$subDir/$library', '');
+			daFolder.split(daFolder.substring(daFolder.indexOf('/'), daFolder.length)).join(''); // fancy
+			if (!daFolder.startsWith('.'))
+				libraryArray.push(daFolder);
 		}
 
 		return libraryArray;
@@ -78,9 +79,7 @@ class CoolUtil
 
 	public static function getAnimsFromTxt(path:String):Array<Array<String>>
 	{
-		var fullText:String = Assets.getText(path);
-
-		var firstArray:Array<String> = fullText.split('\n');
+		var firstArray:Array<String> = Assets.getText(path).split('\n');
 		var swagOffsets:Array<Array<String>> = [];
 
 		for (i in firstArray)

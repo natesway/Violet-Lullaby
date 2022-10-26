@@ -54,7 +54,7 @@ class Log
 						+ '-'
 						+ Date.now().toString().replace(' ', '-').replace(':', "'")
 						+ '.log',
-						errMsg
+						message
 						+ '\n');
 				}
 				#if android
@@ -63,7 +63,12 @@ class Log
 				#end
 				#end
 
-				println(message);
+				#if sys
+				Sys.println(message);
+				#else
+				// Pass null to exclude the position.
+				haxe.Log.trace(message, null);
+				#end
 				Lib.application.window.alert(message, 'Error!');
 				System.exit(1);
 			}
@@ -169,16 +174,6 @@ class Log
 		{
 			untyped #if haxe4 js.Syntax.code #else __js__ #end ("console").log = function() {};
 		}
-		#end
-	}
-
-	private static function println(msg:String):Void
-	{
-		#if sys
-		Sys.println(msg);
-		#else
-		// Pass null to exclude the position.
-		haxe.Log.trace(msg, null);
 		#end
 	}
 }

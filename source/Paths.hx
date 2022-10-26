@@ -109,7 +109,7 @@ class Paths
 	// define the locally tracked assets
 	public static var localTrackedAssets:Array<String> = [];
 
-	public static function clearStoredMemory(?cleanUnused:Bool = false):Void
+	public static function clearStoredMemory():Void
 	{
 		@:privateAccess
 		for (key in FlxG.bitmap._cache.keys())
@@ -117,13 +117,6 @@ class Paths
 			var obj = FlxG.bitmap._cache.get(key);
 			if (obj != null && !currentTrackedAssets.exists(key))
 			{
-				if (currentTrackedTextures.exists(key))
-				{
-					var texture = currentTrackedTextures.get(key);
-					texture.dispose();
-					texture = null;
-				}
-
 				if (Assets.cache.hasBitmapData(key))
 				{
 					Assets.cache.removeBitmapData(key);
@@ -153,7 +146,7 @@ class Paths
 		localTrackedAssets = [];
 	}
 
-	public static function returnGraphic(key:String, ?library:String, ?textureCompression:Bool = false):FlxGraphic
+	public static function returnGraphic(key:String, ?library:String, ?compression:Bool = false):FlxGraphic
 	{
 		var path:String = getPath('images/$key.png', IMAGE, library);
 		if (Assets.exists(path, IMAGE))
@@ -163,14 +156,14 @@ class Paths
 				var bitmap:BitmapData = Assets.getBitmapData(path);
 				var graphic:FlxGraphic;
 
-				if (textureCompression)
+				if (compression)
 				{
-					var texture = FlxG.stage.context3D.createTexture(bitmap.width, bitmap.height, BGRA, true, 0);
+					var texture:Texture = FlxG.stage.context3D.createTexture(bitmap.width, bitmap.height, BGRA, true, 0);
 					texture.uploadFromBitmapData(bitmap);
 					currentTrackedTextures.set(path, texture);
 
-					bitmap.dispose();
 					bitmap.disposeImage();
+					bitmap.dispose();
 					bitmap = null;
 
 					trace('new texture $key, bitmap is $bitmap');
@@ -301,8 +294,8 @@ class Paths
 	static public function inst(song:String, old:Bool, ?library:String):Sound
 		return returnSound('songs', '${CoolUtil.swapSpaceDash(song.toLowerCase())}/Inst' + (old ? '_old' : ''), library);
 
-	static public function image(key:String, ?library:String, ?textureCompression:Bool = false)
-		return returnGraphic(key, library, textureCompression);
+	static public function image(key:String, ?library:String, ?compression:Bool = false)
+		return returnGraphic(key, library, compression);
 
 	static public function font(key:String):String
 		return 'assets/fonts/$key';

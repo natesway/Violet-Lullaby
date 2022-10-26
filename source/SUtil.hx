@@ -65,7 +65,10 @@ class SUtil
 				FileSystem.createDirectory(SUtil.getPath() + 'assets/cutscenes');
 
 			for (cutscene in Assets.list().filter(list -> list.contains('assets/cutscenes')))
-				SUtil.copyContent(cutscene, SUtil.getPath() + cutscene);
+			{
+				if (cutscene.endsWith('.mp4')) // im lazy to put all video formats XD
+					SUtil.copyContent(cutscene, SUtil.getPath() + cutscene);
+			}
 		}
 		#end
 	}

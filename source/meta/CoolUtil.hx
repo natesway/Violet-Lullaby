@@ -67,7 +67,7 @@ class CoolUtil
 		for (folder in Assets.list().filter(list -> list.contains('$subDir/$library')))
 		{
 			// simulating da FileSystem.readDirectory?
-			var daFolder:String = folder.replace('$subDir/$library', '');
+			var daFolder:String = folder.replace('$subDir/$library/', '');
 			daFolder = daFolder.replace(daFolder.substring(daFolder.indexOf('/'), daFolder.length), ''); // fancy
 			if (!daFolder.startsWith('.') && !libraryArray.contains(daFolder))
 				libraryArray.push(daFolder);

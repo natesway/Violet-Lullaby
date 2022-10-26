@@ -608,7 +608,7 @@ class GameOverSubstate extends MusicBeatSubState
 					bg.antialiasing = true;
 
 					var video:VideoHandler = new VideoHandler();
-					video.playVideo(Paths.video('feraligatr'));
+					video.playVideo(SUtil.getPath() + Paths.video('feraligatr'));
 					video.finishCallback = function()
 					{
 						if (video.bitmapData != null)

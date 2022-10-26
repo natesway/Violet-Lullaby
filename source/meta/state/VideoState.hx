@@ -1,7 +1,7 @@
 package meta.state;
 
-import sys.FileSystem;
 import meta.MusicBeat.MusicBeatState;
+import sys.FileSystem;
 
 class VideoState extends MusicBeatState
 {
@@ -12,7 +12,7 @@ class VideoState extends MusicBeatState
 		super.create();
 
 		#if VIDEOS_ALLOWED
-		var filepath:String = Paths.video(videoName);
+		var filepath:String = SUtil.getPath() + Paths.video(videoName);
 		if (!FileSystem.exists(filepath))
 		{
 			close();

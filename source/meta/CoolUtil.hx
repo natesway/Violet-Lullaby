@@ -3,7 +3,6 @@ package meta;
 import flixel.math.FlxMath;
 import openfl.utils.Assets;
 import meta.state.PlayState;
-import sys.FileSystem;
 
 using StringTools;
 
@@ -65,7 +64,7 @@ class CoolUtil
 	{
 		var libraryArray:Array<String> = [];
 
-		for (folder in Assets.list().filter(files -> files.contains('$subDir/$library')))
+		for (folder in Assets.list().filter(list -> list.contains('$subDir/$library')))
 		{
 			// simulating da FileSystem.readDirectory?
 			var daFolder:String = folder.replace('$subDir/$library', '');

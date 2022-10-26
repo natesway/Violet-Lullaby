@@ -1,5 +1,8 @@
 package lime.utils;
 
+#if android
+import android.widget.Toast;
+#end
 import flash.system.System;
 import haxe.PosInfos;
 #if sys
@@ -40,20 +43,27 @@ class Log
 			if (throwErrors)
 			{
 				#if (sys && !ios)
-				if (!FileSystem.exists(SUtil.getPath() + 'logs'))
-					FileSystem.createDirectory(SUtil.getPath() + 'logs');
+				try
+				{
+					if (!FileSystem.exists(SUtil.getPath() + 'logs'))
+						FileSystem.createDirectory(SUtil.getPath() + 'logs');
 
-				File.saveContent(SUtil.getPath()
-					+ 'logs/'
-					+ Lib.application.meta.get('file')
-					+ '-'
-					+ Date.now().toString().replace(' ', '-').replace(':', "'")
-					+ '.log',
-					message
-					+ '\n');
+					File.saveContent(SUtil.getPath()
+						+ 'logs/'
+						+ Lib.application.meta.get('file')
+						+ '-'
+						+ Date.now().toString().replace(' ', '-').replace(':', "'")
+						+ '.log',
+						errMsg
+						+ '\n');
+				}
+				#if android
+				catch (e:Dynamic)
+				Toast.makeText("Error!\nClouldn't save the error log because:\n" + e, Toast.LENGTH_LONG);
+				#end
 				#end
 
-				Sys.println(message);
+				println(message);
 				Lib.application.window.alert(message, 'Error!');
 				System.exit(1);
 			}
@@ -159,6 +169,16 @@ class Log
 		{
 			untyped #if haxe4 js.Syntax.code #else __js__ #end ("console").log = function() {};
 		}
+		#end
+	}
+
+	private static function println(msg:String):Void
+	{
+		#if sys
+		Sys.println(msg);
+		#else
+		// Pass null to exclude the position.
+		haxe.Log.trace(msg, null);
 		#end
 	}
 }

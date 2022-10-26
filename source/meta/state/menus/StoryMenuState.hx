@@ -108,6 +108,10 @@ class StoryMenuState extends MusicBeatState
 
 		updateSelectionScript(selectedWeek);
 		CoolUtil.lerpSnap = true;
+
+		#if mobile
+		addVirtualPad(LEFT_RIGHT, A_B);
+		#end
 	}
 
 	public static var selectedWeek:Int = 0;

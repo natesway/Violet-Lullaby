@@ -130,6 +130,10 @@ class MainMenuState extends MusicBeatState
 		}
 		add(textGroup);
 		add(lockGroup);
+
+		#if mobile
+		addVirtualPad(UP_DOWN, A);
+		#end
 	}
 
 	public var curSelection:Int = 0;

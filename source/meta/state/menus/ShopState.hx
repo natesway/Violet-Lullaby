@@ -181,8 +181,6 @@ class ShopState extends MusicBeatState
 		if (!playIntro)
 			FlxG.sound.music.fadeIn(0.5, 0, 1);
 
-		// FlxG.stage.addEventListener(MouseEvent.MOUSE_WHEEL, scroll);
-
 		// instantiate the new groups
 		shopGroup = new FlxTypedGroup<FlxObject>();
 		freeplayGroup = new FlxTypedGroup<FlxObject>();
@@ -606,6 +604,10 @@ class ShopState extends MusicBeatState
 		switchPortrait(portraitText);
 
 		CoolUtil.lerpSnap = true;
+
+		#if mobile
+		addVirtualPad(LEFT_FULL, A_B);
+		#end
 	}
 
 	function addToFreeplayList(i:String, ?library:String)
@@ -651,36 +653,6 @@ class ShopState extends MusicBeatState
 
 				lastShopDialogue.push(randomizeDialogue);
 				timeToChange += 10 * 60;
-			}
-		}
-	}
-
-	function scroll(event:MouseEvent)
-	{
-		if (freeplaySelected && canControl)
-			updateVerticalSelection(verticalSelection - event.delta, grpSongs.members.length - 1);
-	}
-
-	function onMouseDown(event:MouseEvent)
-	{
-		if (freeplaySelected && canControl)
-		{
-			canControl = false;
-			for (j in grpSongs)
-			{
-				if (j.textIdentifier == verticalSelection)
-				{
-					selectedItem = j;
-					break;
-				}
-			}
-			if (selectedItem != null)
-			{
-				FlxG.sound.play(Paths.sound('confirmMenu'));
-				FlxFlicker.flicker(selectedItem, 0.85, 0.06 * 2, true, false, function(flick:FlxFlicker)
-				{
-					zoomIn = true;
-				});
 			}
 		}
 	}

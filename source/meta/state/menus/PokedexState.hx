@@ -247,6 +247,10 @@ class PokedexState extends MusicBeatState
 		add(altHtWt);
 
 		moveDexSel(0);
+
+		#if mobile
+		addVirtualPad(UP_DOWN, A_B);
+		#end
 	}
 
 	override public function update(elapsed:Float)

@@ -101,7 +101,6 @@ class PreloadState extends FlxState
 
 	function assetGenerate()
 	{
-		//
 		var countUp:Int = 0;
 		for (i in assetStack.keys())
 		{
@@ -117,13 +116,11 @@ class PreloadState extends FlxState
 			loadText.text = 'Loading... Progress at ${Math.floor(storedPercentage * 100)}%';
 		}
 
-		///*
 		FlxTween.tween(FlxG.camera, {alpha: 0}, 0.5, {
 			onComplete: function(tween:FlxTween)
 			{
 				FlxG.switchState(new DisclaimerState());
 			}
 		});
-		//*/
 	}
 }

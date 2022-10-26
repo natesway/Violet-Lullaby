@@ -260,7 +260,14 @@ class TitleState extends MusicBeatState
 			#end
 		}
 
-		if (pressedEnter && !transitioning && skippedIntro)
+		#if mobile
+		var justTouched:Bool = false;
+		for (touch in FlxG.touches.list)
+			if (touch.justPressed)
+				justTouched = true;
+		#end
+
+		if (pressedEnter #if mobile || justTouched #end && !transitioning && skippedIntro)
 		{
 			titleText.visible = false;
 			titleTextSelected.visible = true;

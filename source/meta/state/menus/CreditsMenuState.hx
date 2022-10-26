@@ -293,6 +293,10 @@ frostbite,shitno,monochrome,stranged red and isotope,missingno and a few other s
 		background.add(descriptionText);
 
 		updateText();
+
+		#if mobile
+		addVirtualPad(LEFT_FULL, B);
+		#end
 	}
 
 	public var moverCooldown:Float = 0;

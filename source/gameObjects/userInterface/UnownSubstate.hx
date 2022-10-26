@@ -4,20 +4,17 @@ import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
-import flixel.addons.transition.FlxTransitionableState;
 import flixel.effects.FlxFlicker;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.input.keyboard.FlxKey;
-import flixel.system.FlxSound;
 import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import haxe.Json;
 import meta.MusicBeat.MusicBeatSubState;
-import meta.data.Song;
 import meta.state.PlayState;
+import openfl.events.KeyboardEvent;
 import openfl.utils.Assets;
 
 using StringTools;
@@ -140,11 +137,15 @@ class UnownSubstate extends MusicBeatSubState
 			lines.members[i].x = unowns.members[i].x;
 		}
 
-		timerTxt = new FlxText(FlxG.width / 2 - 5, 430, 0, '0', 32);
+		timerTxt = new FlxText(FlxG.width / 2 - 5, 430, 0, Std.string(timer), 32);
 		timerTxt.alignment = 'center';
 		timerTxt.font = Paths.font('metro.otf');
 		add(timerTxt);
-		timerTxt.text = Std.string(timer);
+
+		#if mobile
+		FlxG.stage.window.textInputEnabled = true;
+		#end
+		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 	}
 
 	public static function init()
@@ -172,57 +173,45 @@ class UnownSubstate extends MusicBeatSubState
 		}
 	}
 
+	private function onKeyDown(e:KeyboardEvent):Void
+	{
+		if (e.keyCode == 16 || e.keyCode == 17 || e.keyCode == 220 || e.keyCode == 27) // Do nothing for Shift, Ctrl, Esc, and flixel console hotkey
+			return;
+		else
+		{
+			if (e.charCode == 0) // Non-printable characters crash String.fromCharCode
+				return;
+
+			var daKey:String = String.fromCharCode(e.charCode);
+			if (realWord.charAt(position) == daKey)
+				correctLetter();
+			else
+				FlxG.sound.play(Paths.sound('BUZZER'));
+		}
+	}
+
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
 
+		timerTxt.text = Std.string(timer);
+
 		for (i in lines)
 		{
 			if (i.ID == position)
-			{
 				FlxFlicker.flicker(i, 1.3, 1, true, false);
-			}
 			else if (i.ID < position)
 			{
 				i.visible = false;
 				i.alpha = 0;
 			}
 		}
-		if (FlxG.keys.justPressed.ANY)
-		{
-			if (realWord.charAt(position) == '?')
-			{
-				if (FlxG.keys.justPressed.SLASH && FlxG.keys.pressed.SHIFT)
-					correctLetter();
-				else if (!FlxG.keys.justPressed.SHIFT)
-					FlxG.sound.play(Paths.sound('BUZZER'));
-			}
-			else if (realWord.charAt(position) == '!')
-			{
-				if (FlxG.keys.justPressed.ONE && FlxG.keys.pressed.SHIFT)
-					correctLetter();
-				else if (!FlxG.keys.justPressed.SHIFT)
-					FlxG.sound.play(Paths.sound('BUZZER'));
-			}
-			else
-			{
-				if (FlxG.keys.anyJustPressed([FlxKey.fromString(realWord.charAt(position))]))
-				{
-					correctLetter();
-				}
-				else
-					FlxG.sound.play(Paths.sound('BUZZER'));
-			}
-		}
-		/*if (FlxG.keys.justPressed.Z) {
-			close();
-			win();
-		}*/
 	}
 
 	override function beatHit()
 	{
 		super.beatHit();
+
 		if (timer > 0)
 			timer--;
 		else
@@ -230,12 +219,14 @@ class UnownSubstate extends MusicBeatSubState
 			close();
 			lose();
 		}
-		timerTxt.text = Std.string(timer);
 	}
 
-	override public function close()
+	override function destroy():Void
 	{
-		// FlxG.autoPause = true;
-		super.close();
+		#if mobile
+		FlxG.stage.window.textInputEnabled = false;
+		#end
+		FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+		super.destroy();
 	}
 }

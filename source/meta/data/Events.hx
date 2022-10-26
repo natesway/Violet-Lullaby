@@ -26,7 +26,7 @@ class Events
 		var futureEvents:Array<String> = [];
 		var futureSubEvents:Array<String> = [];
 
-		for (event in Assets.list().filter(files -> files.contains('assets/events')))
+		for (event in Assets.list().filter(list -> list.contains('assets/events')))
 		{
 			var daEvent:String = event.replace('assets/events/', '');
 			daEvent = daEvent.replace(daEvent.substring(daEvent.indexOf('/'), daEvent.length), ''); // fancy
@@ -41,7 +41,7 @@ class Events
 			{
 				if (PlayState.SONG != null && CoolUtil.spaceToDash(PlayState.SONG.song.toLowerCase()) == daEvent)
 				{
-					for (subEvent in Assets.list().filter(files -> files.contains('assets/events/$daEvent')))
+					for (subEvent in Assets.list().filter(list -> list.contains('assets/events/$daEvent')))
 					{
 						var daSubEvent:String = subEvent.replace('assets/events/$daEvent/', '');
 						daSubEvent = daSubEvent.replace(daSubEvent.substring(daSubEvent.indexOf('/'), daSubEvent.length), ''); // fancy

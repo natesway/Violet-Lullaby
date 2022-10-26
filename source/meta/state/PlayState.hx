@@ -1116,8 +1116,15 @@ class PlayState extends MusicBeatState
 			];
 		}
 
-		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
-		FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
+		#if mobile
+		addMobileControls();
+		#end
+
+		if (!Init.trueSettings.get('Controller Mode'))
+		{
+			FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
+			FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
+		}
 
 		moneySound = new FlxSound().loadEmbedded(Paths.sound('MoneyBagGet'), false, true);
 		FlxG.sound.list.add(moneySound);
@@ -1658,7 +1665,7 @@ class PlayState extends MusicBeatState
 
 		if ((key >= 0)
 			&& !strumLines.members[playerLane].autoplay
-			&& (FlxG.keys.checkStatus(eventKey, JUST_PRESSED))
+			&& (FlxG.keys.checkStatus(eventKey, JUST_PRESSED) || Init.trueSettings.get('Controller Mode'))
 			&& (FlxG.keys.enabled && !paused && (FlxG.state.active || FlxG.state.persistentUpdate)))
 		{
 			if (generatedMusic && !inCutscene)
@@ -1752,8 +1759,11 @@ class PlayState extends MusicBeatState
 
 	override public function destroy()
 	{
-		FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
-		FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
+		if (!Init.trueSettings.get('Controller Mode'))
+		{
+			FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
+			FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
+		}
 
 		super.destroy();
 	}
@@ -2014,8 +2024,7 @@ class PlayState extends MusicBeatState
 		if (!inCutscene && generatedMusic)
 		{
 			// pause the game if the game is allowed to pause and enter is pressed
-			if (FlxG.keys.justPressed.ENTER
-				&& startedCountdown
+			if (FlxG.keys.justPressed.ENTER #if android || FlxG.android.justReleased.BACK #end && startedCountdown
 				&& (accuracySound == null || (accuracySound != null && !accuracySound.playing))
 				&& canPause
 				&& !deadstone)
@@ -2293,34 +2302,34 @@ class PlayState extends MusicBeatState
 				die();
 
 			/*if (Main.hypnoDebug)
-					{
-						if (FlxG.keys.justPressed.ONE) 
-							{
-								songMusic.volume = 0;
-								vocals.volume = 0;
-								doMoneyBag();
-							}
-
-						if (FlxG.keys.justPressed.TWO) {
-							if (!usedTimeTravel && Conductor.songPosition + 10000 < songMusic.length)
-							{
-								usedTimeTravel = true;
-								songMusic.pause();
-								vocals.pause();
-								Conductor.songPosition += 10000;
-
-								canDie = false;
-
-								songMusic.time = Conductor.songPosition;
-								songMusic.play();
-								vocals.time = Conductor.songPosition;
-								vocals.play();
-								new FlxTimer().start(0.5, function(tmr:FlxTimer)
-								{
-									usedTimeTravel = false;
-								});
-							}
+				{
+					if (FlxG.keys.justPressed.ONE) 
+						{
+							songMusic.volume = 0;
+							vocals.volume = 0;
+							doMoneyBag();
 						}
+
+					if (FlxG.keys.justPressed.TWO) {
+						if (!usedTimeTravel && Conductor.songPosition + 10000 < songMusic.length)
+						{
+							usedTimeTravel = true;
+							songMusic.pause();
+							vocals.pause();
+							Conductor.songPosition += 10000;
+
+							canDie = false;
+
+							songMusic.time = Conductor.songPosition;
+							songMusic.play();
+							vocals.time = Conductor.songPosition;
+							vocals.play();
+							new FlxTimer().start(0.5, function(tmr:FlxTimer)
+							{
+								usedTimeTravel = false;
+							});
+						}
+					}
 			}*/
 
 			// copy paste im lazy
@@ -2525,7 +2534,11 @@ class PlayState extends MusicBeatState
 				}
 				// */
 			}
+
 			noteCalls();
+
+			if (Init.trueSettings.get('Controller Mode'))
+				controllerInput();
 		}
 
 		if (staticCamera)
@@ -2752,6 +2765,32 @@ class PlayState extends MusicBeatState
 	}
 
 	public var mxMechanic:Bool = false;
+
+	// maybe theres a better place to put this, idk -saw
+	function controllerInput()
+	{
+		var justPressArray:Array<Bool> = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P];
+
+		var justReleaseArray:Array<Bool> = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R];
+
+		if (justPressArray.contains(true))
+		{
+			for (i in 0...justPressArray.length)
+			{
+				if (justPressArray[i])
+					onKeyPress(new KeyboardEvent(KeyboardEvent.KEY_DOWN, true, true, -1, keysArray[i][0]));
+			}
+		}
+
+		if (justReleaseArray.contains(true))
+		{
+			for (i in 0...justReleaseArray.length)
+			{
+				if (justReleaseArray[i])
+					onKeyRelease(new KeyboardEvent(KeyboardEvent.KEY_UP, true, true, -1, keysArray[i][0]));
+			}
+		}
+	}
 
 	function noteCalls()
 	{
@@ -3968,7 +4007,9 @@ class PlayState extends MusicBeatState
 		if (!songLoops)
 		{
 			canPause = false;
-
+			#if mobile
+			mobileControls.visible = false;
+			#end
 			songMusic.volume = 0;
 			vocals.volume = 0;
 
@@ -4227,6 +4268,11 @@ class PlayState extends MusicBeatState
 	public function startCountdown():Void
 	{
 		inCutscene = false;
+
+		#if mobile
+		mobileControls.visible = true;
+		#end
+
 		Conductor.songPosition = -(Conductor.crochet * 5);
 		swagCounter = 0;
 

@@ -56,6 +56,9 @@ class OptionsMenuState extends MusicBeatState
 				[
 					['preferences', callNewGroup],
 					['appearance', callNewGroup],
+					#if mobile
+					['mobile controls', openMobileControlsMenu],
+					#end
 					['controls', openControlmenu],
 					['exit', exitMenu]
 				]
@@ -64,6 +67,7 @@ class OptionsMenuState extends MusicBeatState
 				[
 					['Game Settings', null],
 					['', null],
+					['Controller Mode', getFromOption],
 					['Downscroll', getFromOption],
 					['Centered Notefield', getFromOption],
 					['Ghost Tapping', getFromOption],
@@ -586,6 +590,22 @@ class OptionsMenuState extends MusicBeatState
 			});
 		}
 	}
+
+	#if mobile
+	public function openMobileControlsMenu()
+	{
+		if (controls.ACCEPT)
+		{
+			FlxG.sound.play(Paths.sound('confirmMenu'));
+			lockedMovement = true;
+			FlxFlicker.flicker(activeSubgroup.members[curSelection], 0.5, 0.06 * 2, true, false, function(flick:FlxFlicker)
+			{
+				openSubState(new mobile.MobileControlsSubState());
+				lockedMovement = false;
+			});
+		}
+	}
+	#end
 
 	public function exitMenu()
 	{

@@ -42,6 +42,12 @@ class Init extends FlxState
 	public static var NOT_FORCED = 'not forced';
 
 	public static var gameSettings:Map<String, Dynamic> = [
+		'Controller Mode' => [
+			#if mobile true #else false #end,
+			Checkmark,
+			'Whether to play with a controller instead of using your Keyboard.',
+			NOT_FORCED
+		],
 		'Downscroll' => [
 			false,
 			Checkmark,

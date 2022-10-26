@@ -5,11 +5,9 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.graphics.FlxGraphic;
 import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.system.FlxAssets;
 import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
-import gameObjects.Character;
 import sys.thread.Thread;
 
 enum PreloadType

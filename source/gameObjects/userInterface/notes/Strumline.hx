@@ -1,30 +1,16 @@
 package gameObjects.userInterface.notes;
 
-import flixel.FlxBasic;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.FlxState;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxSpriteGroup;
-import flixel.math.FlxMath;
-import flixel.math.FlxRect;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxSort;
-import meta.data.Conductor;
-import meta.data.Timings;
 import meta.state.PlayState;
 
 using StringTools;
 
-/*
-	import flixel.FlxG;
-
-	import flixel.animation.FlxBaseAnimation;
-	import flixel.graphics.frames.FlxAtlasFrames;
-	import flixel.tweens.FlxEase;
-	import flixel.tweens.FlxTween; 
- */
 class UIStaticArrow extends FlxSprite
 {
 	/*  Oh hey, just gonna port this code from the previous Skater engine 

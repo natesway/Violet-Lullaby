@@ -1,12 +1,9 @@
 package meta.subState;
 
-import openfl.filters.ShaderFilter;
-import openfl.display.GraphicsShader;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
-import flixel.FlxSubState;
 import flixel.graphics.FlxGraphic;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
@@ -15,11 +12,13 @@ import flixel.util.FlxTimer;
 import gameObjects.Boyfriend;
 import gameObjects.Character;
 import meta.MusicBeat.MusicBeatSubState;
-import meta.data.Conductor.BPMChangeEvent;
 import meta.data.Conductor;
 import meta.data.dependency.FNFSprite;
-import meta.state.*;
-import meta.state.menus.*;
+import meta.state.PlayState;
+import meta.state.menus.ShopState;
+import meta.state.menus.StoryMenuState;
+import openfl.display.GraphicsShader;
+import openfl.filters.ShaderFilter;
 import openfl.media.Sound;
 import openfl.utils.Assets;
 

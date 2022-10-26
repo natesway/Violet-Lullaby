@@ -4,23 +4,14 @@ package gameObjects;
 	The character class initialises any and all characters that exist within gameplay. For now, the character class will
 	stay the same as it was in the original source of the game. I'll most likely make some changes afterwards though!
 **/
-import flixel.FlxG;
-import flixel.addons.util.FlxSimplex;
-import flixel.animation.FlxBaseAnimation;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.math.FlxPoint;
-import flixel.util.FlxTimer;
 import flxanimate.FlxAnimate;
-import gameObjects.userInterface.HealthIcon;
-import meta.*;
-import meta.data.*;
+import meta.data.Conductor;
 import meta.data.dependency.FNFSprite;
 import meta.state.PlayState;
-import openfl.utils.Assets as OpenFlAssets;
 
 using StringTools;
-
-// import flixel.util.typeLimit.OneOfThree;
 
 enum Direction
 {

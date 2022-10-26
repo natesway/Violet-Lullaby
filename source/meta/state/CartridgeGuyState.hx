@@ -5,8 +5,6 @@ import flixel.tweens.FlxEase;
 import flixel.addons.text.FlxTypeText;
 import meta.MusicBeat.MusicBeatState;
 import flixel.util.FlxTimer;
-import flixel.FlxBasic;
-import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;

@@ -3,7 +3,6 @@ package meta.subState;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.addons.transition.FlxTransitionableState;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import meta.MusicBeat.MusicBeatSubState;

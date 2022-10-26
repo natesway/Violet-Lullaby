@@ -1,24 +1,12 @@
 package gameObjects;
 
 import flixel.FlxBasic;
-import flixel.FlxCamera;
-import flixel.FlxG;
-import flixel.FlxObject;
 import flixel.FlxSprite;
-import flixel.FlxState;
-import flixel.addons.effects.FlxTrail;
-import flixel.addons.effects.chainable.FlxWaveEffect;
 import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxPoint;
-import flixel.math.FlxRect;
-import flixel.system.FlxSound;
-import flixel.text.FlxText;
-import flixel.tweens.FlxTween;
-import gameObjects.background.*;
+import gameObjects.background.BackgroundDancer;
 import haxe.ds.List;
 import meta.CoolUtil;
-import meta.data.Conductor;
 import meta.data.dependency.FNFSprite;
 import meta.state.PlayState;
 

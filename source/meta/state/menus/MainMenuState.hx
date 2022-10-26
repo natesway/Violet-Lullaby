@@ -1,25 +1,14 @@
 package meta.state.menus;
 
-import flixel.FlxCamera;
 import flixel.FlxG;
-import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxBackdrop;
-import flixel.addons.transition.FlxTransitionableState;
 import flixel.effects.FlxFlicker;
-import flixel.graphics.frames.FlxAtlasFrames;
-import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
-import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxColor;
-import flixel.util.FlxTimer;
 import meta.MusicBeat.MusicBeatState;
 import meta.data.Highscore;
-import meta.data.Song;
 #if DISCORD_ALLOWED
 import meta.data.dependency.Discord;
 #end

@@ -2,7 +2,7 @@ package;
 
 import flixel.FlxG;
 import flixel.system.FlxSound;
-import meta.data.*;
+import meta.data.Conductor;
 import openfl.utils.Assets;
 
 /**

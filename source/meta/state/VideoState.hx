@@ -26,6 +26,9 @@ class VideoState extends MusicBeatState
 			close();
 			return;
 		}
+		#else
+		close();
+		return;
 		#end
 	}
 

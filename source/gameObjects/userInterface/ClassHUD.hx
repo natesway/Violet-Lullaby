@@ -1,24 +1,13 @@
 package gameObjects.userInterface;
 
-import flixel.FlxBasic;
-import flixel.FlxCamera;
 import flixel.FlxG;
-import flixel.FlxObject;
 import flixel.FlxSprite;
-import flixel.FlxState;
-import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxSpriteGroup;
-import flixel.math.FlxMath;
 import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
 import flixel.ui.FlxBar;
 import flixel.util.FlxColor;
 import flixel.util.FlxSort;
-import flixel.util.FlxTimer;
 import meta.CoolUtil;
-import meta.InfoHud;
-import meta.data.Conductor;
 import meta.data.Timings;
 import meta.state.PlayState;
 import meta.state.menus.StoryMenuState;

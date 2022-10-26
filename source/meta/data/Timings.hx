@@ -1,6 +1,6 @@
 package meta.data;
 
-import gameObjects.userInterface.notes.*;
+import gameObjects.userInterface.notes.Note;
 import meta.state.PlayState;
 
 /**

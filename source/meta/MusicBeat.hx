@@ -1,18 +1,17 @@
 package meta;
 
+import flixel.FlxG;
+import flixel.FlxSubState;
+import meta.data.Conductor;
+import meta.data.PlayerSettings;
+import meta.data.dependency.FNFUIState;
 #if mobile
-import mobile.MobileControls;
-import mobile.flixel.FlxVirtualPad;
 import flixel.FlxCamera;
 import flixel.input.actions.FlxActionInput;
 import flixel.util.FlxDestroyUtil;
+import mobile.MobileControls;
+import mobile.flixel.FlxVirtualPad;
 #end
-import flixel.FlxG;
-import flixel.FlxSubState;
-import meta.*;
-import meta.data.*;
-import meta.data.Conductor.BPMChangeEvent;
-import meta.data.dependency.FNFUIState;
 
 /* 
 	Music beat state happens to be the first thing on my list of things to add, it just so happens to be the backbone of

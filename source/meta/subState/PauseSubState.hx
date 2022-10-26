@@ -2,24 +2,18 @@ package meta.subState;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.FlxSubState;
-import flixel.addons.transition.FlxTransitionableState;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.input.keyboard.FlxKey;
 import flixel.math.FlxMath;
 import flixel.system.FlxSound;
 import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import gameObjects.userInterface.menu.Textbox;
 import meta.MusicBeat.MusicBeatSubState;
-import meta.data.font.Alphabet;
-import meta.state.*;
-import meta.state.menus.*;
+import meta.state.PlayState;
+import meta.state.menus.ShopState;
+import meta.state.menus.StoryMenuState;
+import openfl.utils.Assets;
 import sys.thread.Mutex;
 import sys.thread.Thread;
-import openfl.utils.Assets;
 
 class PauseSubState extends MusicBeatSubState
 {

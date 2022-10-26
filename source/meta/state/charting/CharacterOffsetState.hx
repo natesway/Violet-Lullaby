@@ -4,9 +4,7 @@ import flixel.FlxG;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import gameObjects.Boyfriend;
-import gameObjects.Character;
 import meta.MusicBeat.MusicBeatState;
-import meta.data.dependency.FNFSprite;
 import meta.state.menus.StoryMenuState;
 
 class CharacterOffsetState extends MusicBeatState

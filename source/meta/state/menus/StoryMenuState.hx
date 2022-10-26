@@ -2,15 +2,12 @@ package meta.state.menus;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.addons.transition.FlxTransitionableState;
-import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import gameObjects.Character;
 import meta.MusicBeat.MusicBeatState;
-import meta.data.Highscore;
 import meta.data.Song;
 #if DISCORD_ALLOWED
 import meta.data.dependency.Discord;

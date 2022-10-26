@@ -1,9 +1,9 @@
 package gameObjects.userInterface;
 
 import flixel.FlxG;
-import flixel.util.FlxColor;
-import flixel.text.FlxText;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.text.FlxText;
+import flixel.util.FlxColor;
 import haxe.Json;
 import meta.state.PlayState;
 import openfl.utils.Assets;

@@ -1,7 +1,6 @@
 package gameObjects.background;
 
 import flixel.FlxSprite;
-import flixel.addons.editors.spine.FlxSpine;
 
 class BackgroundToad extends FlxSprite
 {

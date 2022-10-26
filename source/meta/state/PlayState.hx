@@ -1,9 +1,5 @@
 package meta.state;
 
-import meta.subState.UnlockSubstate.Unlockable;
-import flxanimate.FlxAnimate;
-import meta.data.dependency.FNFSprite;
-import gameObjects.userInterface.Lyrics;
 import flixel.FlxBasic;
 import flixel.FlxCamera;
 import flixel.FlxG;
@@ -36,22 +32,41 @@ import flixel.util.FlxColor;
 import flixel.util.FlxGradient;
 import flixel.util.FlxSort;
 import flixel.util.FlxTimer;
-import gameObjects.*;
+import flxanimate.FlxAnimate;
+import gameObjects.Boyfriend;
 import gameObjects.Character;
-import gameObjects.userInterface.*;
+import gameObjects.Stage;
+import gameObjects.userInterface.ClassHUD;
+import gameObjects.userInterface.DialogueBox;
+import gameObjects.userInterface.HealthIcon;
+import gameObjects.userInterface.Lyrics;
 import gameObjects.userInterface.UnownSubstate;
-import gameObjects.userInterface.notes.*;
+import gameObjects.userInterface.notes.Note;
 import gameObjects.userInterface.notes.Strumline.UIStaticArrow;
-import meta.*;
+import gameObjects.userInterface.notes.Strumline;
 import meta.MusicBeat.MusicBeatState;
-import meta.data.*;
+import meta.data.ChartLoader;
+import meta.data.Conductor;
 import meta.data.Events;
+import meta.data.Highscore;
 import meta.data.ScriptHandler;
 import meta.data.Song.SwagSong;
+import meta.data.Song;
+import meta.data.Timings;
+#if DISCORD_ALLOWED
+import meta.data.dependency.Discord;
+#end
+import meta.data.dependency.FNFSprite;
 import meta.data.font.AttachedText;
-import meta.state.charting.*;
-import meta.state.menus.*;
-import meta.subState.*;
+import meta.state.charting.CharacterOffsetState;
+import meta.state.charting.OriginalChartingState;
+import meta.state.menus.ShopState;
+import meta.state.menus.StoryMenuState;
+import meta.subState.GameOverSubstate;
+import meta.subState.PastaNightSelect;
+import meta.subState.PauseSubState;
+import meta.subState.UnlockSubstate.Unlockable;
+import meta.subState.UnlockSubstate;
 import openfl.display.GraphicsShader;
 import openfl.display.Shader;
 import openfl.events.KeyboardEvent;
@@ -59,9 +74,6 @@ import openfl.filters.BitmapFilter;
 import openfl.filters.ShaderFilter;
 import openfl.media.Sound;
 import openfl.utils.Assets;
-#if DISCORD_ALLOWED
-import meta.data.dependency.Discord;
-#end
 
 using StringTools;
 

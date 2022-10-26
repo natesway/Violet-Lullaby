@@ -1,20 +1,20 @@
 package meta.subState;
 
-import flixel.util.typeLimit.OneOfTwo;
-import flixel.input.keyboard.FlxKey;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import openfl.display.BlendMode;
-import flixel.text.FlxText;
-import meta.data.font.Alphabet;
-import flixel.util.FlxColor;
-import gameObjects.userInterface.menu.Textbox;
 import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.input.keyboard.FlxKey;
+import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
+import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import flixel.util.typeLimit.OneOfTwo;
+import gameObjects.userInterface.menu.Textbox;
 import meta.MusicBeat.MusicBeatSubState;
 import meta.data.dependency.FNFSprite;
+import meta.data.font.Alphabet;
+import openfl.display.BlendMode;
 
 using StringTools;
 

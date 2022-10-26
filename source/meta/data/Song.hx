@@ -2,9 +2,9 @@ package meta.data;
 
 import haxe.Json;
 import haxe.format.JsonParser;
-import openfl.utils.Assets;
 import meta.data.Section.SwagSection;
 import meta.state.PlayState;
+import openfl.utils.Assets;
 
 using StringTools;
 

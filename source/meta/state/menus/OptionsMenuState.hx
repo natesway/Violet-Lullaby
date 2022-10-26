@@ -8,7 +8,6 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-import gameObjects.userInterface.menu.Checkmark;
 import gameObjects.userInterface.menu.Selector;
 import meta.MusicBeat.MusicBeatState;
 #if DISCORD_ALLOWED

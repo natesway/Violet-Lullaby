@@ -1,6 +1,5 @@
 package meta.state;
 
-import flixel.FlxG;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import haxe.Json;

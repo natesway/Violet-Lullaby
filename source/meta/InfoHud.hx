@@ -1,7 +1,5 @@
 package meta;
 
-// import Main;
-import flixel.FlxG;
 import haxe.Timer;
 import openfl.events.Event;
 import openfl.system.System;

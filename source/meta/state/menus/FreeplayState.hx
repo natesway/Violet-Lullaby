@@ -1,27 +1,23 @@
 package meta.state.menus;
 
-import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.addons.display.FlxGridOverlay;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.system.FlxSound;
 import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
-import flixel.tweens.misc.ColorTween;
 import flixel.util.FlxColor;
 import gameObjects.userInterface.HealthIcon;
-import openfl.utils.Assets;
 import meta.MusicBeat.MusicBeatState;
-import meta.data.*;
-import meta.data.Song.SwagSong;
+import meta.data.Highscore;
+import meta.data.Song;
 #if DISCORD_ALLOWED
 import meta.data.dependency.Discord;
 #end
 import meta.data.font.Alphabet;
 import openfl.media.Sound;
+import openfl.utils.Assets;
 import sys.thread.Mutex;
 import sys.thread.Thread;
 

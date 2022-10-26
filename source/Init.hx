@@ -3,10 +3,9 @@ package;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.input.keyboard.FlxKey;
-import lime._internal.backend.native.NativeCFFI;
 import meta.InfoHud;
 import meta.data.Highscore;
-import meta.state.*;
+import meta.state.DisclaimerState;
 import openfl.filters.BitmapFilter;
 import openfl.filters.ColorMatrixFilter;
 

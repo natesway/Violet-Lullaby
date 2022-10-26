@@ -1,19 +1,17 @@
 package meta.state.menus;
 
-import openfl.display.GraphicsShader;
-import openfl.filters.ShaderFilter;
-import openfl.utils.Assets;
-import flixel.util.FlxSort;
-import flixel.tweens.FlxTween;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.math.FlxPoint;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import flixel.util.FlxSort;
 import haxe.Json;
 import meta.MusicBeat.MusicBeatState;
 import meta.data.Highscore;
+import openfl.display.GraphicsShader;
+import openfl.filters.ShaderFilter;
+import openfl.utils.Assets;
 
 typedef Offsets =
 {

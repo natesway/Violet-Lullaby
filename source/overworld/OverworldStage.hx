@@ -15,7 +15,6 @@ import flixel.FlxState;
 import flixel.addons.display.FlxTiledSprite;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
-import flixel.system.scaleModes.PixelPerfectScaleMode;
 import flixel.util.FlxCollision;
 import flixel.util.FlxColor;
 import meta.Controls;

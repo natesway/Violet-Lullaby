@@ -611,6 +611,7 @@ class GameOverSubstate extends MusicBeatSubState
 					add(bg);
 					bg.antialiasing = true;
 
+					#if VIDEOS_ALLOWED
 					var video:VideoHandler = new VideoHandler();
 					video.playVideo(SUtil.getPath() + Paths.video('feraligatr'));
 					video.finishCallback = function()
@@ -649,6 +650,21 @@ class GameOverSubstate extends MusicBeatSubState
 							video.onVLCComplete();
 						}
 					}
+					#else
+					deathEnd = function()
+						{
+							FlxTween.tween(bg, {alpha: 0}, timeBeforeEnd, {ease: FlxEase.linear});
+	
+							onEnd = function()
+							{
+								remove(bg);
+								bg.pixels.dispose();
+								bg = null;
+							};
+	
+							Conductor.changeBPM(100);
+						};
+					#end
 				}
 				else if (PlayState.SONG.song.toLowerCase() == "monochrome")
 				{

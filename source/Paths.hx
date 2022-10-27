@@ -160,12 +160,12 @@ class Paths
 		localTrackedAssets = [];
 	}
 
-	public static function returnGraphic(key:String, ?library:String, ?compression:Bool = false):FlxGraphic
+	public static function returnGraphic(key:String, ?library:String, ?compression:Bool = false, ?uniqueKey:String):FlxGraphic
 	{
 		var path:String = getPath('images/$key.png', IMAGE, library);
 		if (Assets.exists(path, IMAGE))
 		{
-			if (!currentTrackedAssets.exists(path))
+			if (!currentTrackedAssets.exists(uniqueKey != null ? uniqueKey : path))
 			{
 				var bitmap:BitmapData = Assets.getBitmapData(path);
 				var graphic:FlxGraphic;
@@ -190,27 +190,27 @@ class Paths
 				}
 
 				graphic.persist = true;
-				currentTrackedAssets.set(path, graphic);
+				currentTrackedAssets.set(uniqueKey != null ? uniqueKey : path, graphic);
 			}
 
-			localTrackedAssets.push(path);
-			return currentTrackedAssets.get(path);
+			localTrackedAssets.push(uniqueKey != null ? uniqueKey : path);
+			return currentTrackedAssets.get(uniqueKey != null ? uniqueKey : path);
 		}
 
 		trace('$path its null');
 		return null;
 	}
 
-	public static function returnSound(path:String, key:String, ?library:String):Sound
+	public static function returnSound(path:String, key:String, ?library:String, ?uniqueKey:String):Sound
 	{
 		var gottenPath:String = getPath('$path/$key.$SOUND_EXT', SOUND, library);
-		if (Assets.exists(gottenPath, SOUND))
+		if (Assets.exists(uniqueKey != null ? uniqueKey : gottenPath, SOUND))
 		{
-			if (!currentTrackedSounds.exists(gottenPath))
-				currentTrackedSounds.set(gottenPath, Assets.getSound(gottenPath));
+			if (!currentTrackedSounds.exists(uniqueKey != null ? uniqueKey : gottenPath))
+				currentTrackedSounds.set(uniqueKey != null ? uniqueKey : gottenPath, Assets.getSound(gottenPath));
 
-			localTrackedAssets.push(gottenPath);
-			return currentTrackedSounds.get(gottenPath);
+			localTrackedAssets.push(uniqueKey != null ? uniqueKey : gottenPath);
+			return currentTrackedSounds.get(uniqueKey != null ? uniqueKey : gottenPath);
 		}
 
 		trace('$gottenPath its null');

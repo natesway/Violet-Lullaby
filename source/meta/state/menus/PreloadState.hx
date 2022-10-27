@@ -104,7 +104,7 @@ class PreloadState extends FlxState
 		{
 			trace('calling asset $i');
 
-			var savedGraphic:FlxGraphic = Paths.returnGraphic(i);
+			var savedGraphic:FlxGraphic = Paths.returnGraphic(i, null, false, i);
 			savedGraphic.persist = true;
 			Paths.excludeAsset(i);
 			trace(savedGraphic + ', yeah its working');

@@ -35,7 +35,7 @@ class Events
 
 			if (daEvent.contains('.'))
 			{
-				daEvent = daEvent.substring(0, event.indexOf('.', 0));
+				daEvent = daEvent.substring(0, daEvent.indexOf('.', 0));
 				loadedModules.set(daEvent, ScriptHandler.loadModule('events/$daEvent'));
 				futureEvents.push(daEvent);
 			}

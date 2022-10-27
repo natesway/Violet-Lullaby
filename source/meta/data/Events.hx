@@ -33,7 +33,7 @@ class Events
 
 			if (daEvent.contains('.'))
 			{
-				daEvent = daEvent.substring(0, event.indexOf('.', 0));
+				daEvent = daEvent.substring(1, event.indexOf('.'));
 				loadedModules.set(daEvent, ScriptHandler.loadModule('events/$daEvent'));
 				futureEvents.push(daEvent);
 			}
@@ -45,7 +45,7 @@ class Events
 					{
 						var daSubEvent:String = subEvent.replace('assets/events/$daEvent/', '');
 						daSubEvent = daSubEvent.replace(daSubEvent.substring(daSubEvent.indexOf('/'), daSubEvent.length), ''); // fancy
-						daSubEvent = daSubEvent.substring(0, daSubEvent.indexOf('.', 0));
+						daSubEvent = daSubEvent.substring(1, daSubEvent.indexOf('.'));
 
 						loadedModules.set(daSubEvent, ScriptHandler.loadModule('events/$daEvent/$daSubEvent'));
 						futureSubEvents.push(daSubEvent);

@@ -29,7 +29,9 @@ class Events
 		for (event in Assets.list().filter(list -> list.contains('assets/events')))
 		{
 			var daEvent:String = event.replace('assets/events/', '');
-			daEvent = daEvent.replace(daEvent.substring(daEvent.indexOf('/'), daEvent.length), ''); // fancy
+
+			if (daEvent.contains('/'))
+				daEvent = daEvent.replace(daEvent.substring(daEvent.indexOf('/'), daEvent.length), ''); // fancy
 
 			if (daEvent.contains('.'))
 			{
@@ -44,7 +46,10 @@ class Events
 					for (subEvent in Assets.list().filter(list -> list.contains('assets/events/$daEvent')))
 					{
 						var daSubEvent:String = subEvent.replace('assets/events/$daEvent/', '');
-						daSubEvent = daSubEvent.replace(daSubEvent.substring(daSubEvent.indexOf('/'), daSubEvent.length), ''); // fancy
+
+						if (daSubEvent.contains('/'))
+							daSubEvent = daSubEvent.replace(daSubEvent.substring(daSubEvent.indexOf('/'), daSubEvent.length), ''); // fancy
+
 						daSubEvent = daSubEvent.substring(0, daSubEvent.indexOf('.', 0));
 
 						loadedModules.set(daSubEvent, ScriptHandler.loadModule('events/$daEvent/$daSubEvent'));

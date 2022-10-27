@@ -181,11 +181,11 @@ class Paths
 					bitmap = null;
 
 					trace('new texture $key, bitmap is $bitmap');
-					graphic = FlxGraphic.fromBitmapData(BitmapData.fromTexture(texture), false, path, false);
+					graphic = FlxGraphic.fromBitmapData(BitmapData.fromTexture(texture), false, path, true);
 				}
 				else
 				{
-					graphic = FlxGraphic.fromBitmapData(bitmap, false, path, false);
+					graphic = FlxGraphic.fromBitmapData(bitmap, false, path, true);
 					trace('new bitmap $path, not textured');
 				}
 

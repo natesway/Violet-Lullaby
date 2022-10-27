@@ -60,7 +60,7 @@ class Paths
 	{
 		for (key in currentTrackedAssets.keys())
 		{
-			if (!localTrackedAssets.contains(key) && key != null)
+			if ((!localTrackedAssets.contains(key) && !dumpExclusions.contains(key)) && key != null)
 			{
 				var obj = currentTrackedAssets.get(key);
 				if (obj != null)
@@ -96,7 +96,7 @@ class Paths
 
 		for (key in currentTrackedSounds.keys())
 		{
-			if (!localTrackedAssets.contains(key) && key != null)
+			if ((!localTrackedAssets.contains(key) && !dumpExclusions.contains(key)) && key != null)
 			{
 				if (currentTrackedSounds.exists(key))
 				{
@@ -123,24 +123,27 @@ class Paths
 		@:privateAccess
 		for (key in FlxG.bitmap._cache.keys())
 		{
-			var obj = FlxG.bitmap._cache.get(key);
-			if (obj != null && !currentTrackedAssets.exists(key))
+			if (!currentTrackedAssets.exists(key) && key != null)
 			{
-				obj.bitmap.lock();
-
-				if (Assets.cache.hasBitmapData(key))
+				var obj = FlxG.bitmap._cache.get(key);
+				if (obj != null)
 				{
-					Assets.cache.removeBitmapData(key);
-					Assets.cache.clearBitmapData(key);
-					Assets.cache.clear(key);
-					if (FlxG.bitmap._cache.exists(key))
-						FlxG.bitmap._cache.remove(key);
-				}
+					obj.bitmap.lock();
 
-				obj.bitmap.dispose();
-				obj.bitmap.disposeImage();
-				obj.destroy();
-				obj = null;
+					if (Assets.cache.hasBitmapData(key))
+					{
+						Assets.cache.removeBitmapData(key);
+						Assets.cache.clearBitmapData(key);
+						Assets.cache.clear(key);
+						if (FlxG.bitmap._cache.exists(key))
+							FlxG.bitmap._cache.remove(key);
+					}
+
+					obj.bitmap.dispose();
+					obj.bitmap.disposeImage();
+					obj.destroy();
+					obj = null;
+				}
 			}
 		}
 

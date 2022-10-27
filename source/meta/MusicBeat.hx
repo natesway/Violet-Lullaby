@@ -138,15 +138,10 @@ class MusicBeatState extends FNFUIState
 	// class create event
 	override function create()
 	{
-		try
-		{
-			// dump
-			Paths.clearStoredMemory();
-			if ((!Std.isOfType(this, meta.state.PlayState)) && (!Std.isOfType(this, meta.state.charting.OriginalChartingState)))
-				Paths.clearUnusedMemory();
-		}
-		catch (msg:Dynamic)
-			Lib.application.window.alert(msg, 'Unable to clear the assets!');
+		// dump
+		Paths.clearStoredMemory();
+		if ((!Std.isOfType(this, meta.state.PlayState)) && (!Std.isOfType(this, meta.state.charting.OriginalChartingState)))
+			Paths.clearUnusedMemory();
 
 		if (transIn != null)
 			trace('reg ' + transIn.region);

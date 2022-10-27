@@ -65,6 +65,8 @@ class Paths
 				var obj = currentTrackedAssets.get(key);
 				if (obj != null)
 				{
+					obj.bitmap.lock();
+
 					if (currentTrackedTextures.exists(key))
 					{
 						var texture = currentTrackedTextures.get(key);
@@ -73,17 +75,20 @@ class Paths
 						currentTrackedTextures.remove(key);
 					}
 
+					@:privateAccess
 					if (Assets.cache.hasBitmapData(key))
 					{
 						Assets.cache.removeBitmapData(key);
 						Assets.cache.clearBitmapData(key);
 						Assets.cache.clear(key);
-						@:privateAccess
 						if (FlxG.bitmap._cache.exists(key))
 							FlxG.bitmap._cache.remove(key);
 					}
 
+					obj.bitmap.dispose();
+					obj.bitmap.disposeImage();
 					obj.destroy();
+					obj = null;
 					currentTrackedAssets.remove(key);
 				}
 			}
@@ -121,6 +126,8 @@ class Paths
 			var obj = FlxG.bitmap._cache.get(key);
 			if (obj != null && !currentTrackedAssets.exists(key))
 			{
+				obj.bitmap.lock();
+
 				if (Assets.cache.hasBitmapData(key))
 				{
 					Assets.cache.removeBitmapData(key);
@@ -130,7 +137,10 @@ class Paths
 						FlxG.bitmap._cache.remove(key);
 				}
 
+				obj.bitmap.dispose();
+				obj.bitmap.disposeImage();
 				obj.destroy();
+				obj = null;
 			}
 		}
 
@@ -166,8 +176,8 @@ class Paths
 					texture.uploadFromBitmapData(bitmap);
 					currentTrackedTextures.set(path, texture);
 
-					bitmap.disposeImage();
 					bitmap.dispose();
+					bitmap.disposeImage();
 					bitmap = null;
 
 					trace('new texture $key, bitmap is $bitmap');

@@ -65,7 +65,7 @@ class Paths
 				var obj = currentTrackedAssets.get(key);
 				if (obj != null)
 				{
-					if (currentTrackedTextures.get(key) != null)
+					if (currentTrackedTextures.exists(key))
 					{
 						var texture = currentTrackedTextures.get(key);
 						texture.dispose();
@@ -82,6 +82,7 @@ class Paths
 						if (FlxG.bitmap._cache.exists(key))
 							FlxG.bitmap._cache.remove(key);
 					}
+
 					obj.destroy();
 					currentTrackedAssets.remove(key);
 				}
@@ -92,12 +93,15 @@ class Paths
 		{
 			if (!localTrackedAssets.contains(key) && key != null)
 			{
-				if (currentTrackedSounds.get(key) != null)
+				if (currentTrackedSounds.exists(key))
 				{
-					Assets.cache.removeSound(key);
-					Assets.cache.clearSounds(key);
-					Assets.cache.clear(key);
-					currentTrackedSounds.remove(key);
+					if (Assets.cache.hasSound(key))
+					{
+						Assets.cache.removeSound(key);
+						Assets.cache.clearSounds(key);
+						Assets.cache.clear(key);
+						currentTrackedSounds.remove(key);
+					}
 				}
 			}
 		}
@@ -134,7 +138,7 @@ class Paths
 		{
 			if (key != null && !currentTrackedSounds.exists(key))
 			{
-				if (Assets.cache.getSound(key) != null)
+				if (Assets.cache.hasSound(key))
 				{
 					Assets.cache.removeSound(key);
 					Assets.cache.clearSounds(key);

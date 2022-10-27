@@ -1,5 +1,6 @@
 package meta;
 
+import openfl.Lib;
 import flixel.FlxG;
 import flixel.FlxSubState;
 import meta.data.Conductor;
@@ -137,10 +138,15 @@ class MusicBeatState extends FNFUIState
 	// class create event
 	override function create()
 	{
-		// dump
-		Paths.clearStoredMemory();
-		if ((!Std.isOfType(this, meta.state.PlayState)) && (!Std.isOfType(this, meta.state.charting.OriginalChartingState)))
-			Paths.clearUnusedMemory();
+		try
+		{
+			// dump
+			Paths.clearStoredMemory();
+			if ((!Std.isOfType(this, meta.state.PlayState)) && (!Std.isOfType(this, meta.state.charting.OriginalChartingState)))
+				Paths.clearUnusedMemory();
+		}
+		catch (msg:Dynamic)
+			Lib.application.window.alert(msg, 'Unable to clear the assets!');
 
 		if (transIn != null)
 			trace('reg ' + transIn.region);

@@ -204,7 +204,7 @@ class Paths
 	public static function returnSound(path:String, key:String, ?library:String):Sound
 	{
 		var gottenPath:String = getPath('$path/$key.$SOUND_EXT', SOUND, library);
-		if (Assets.exists(path, SOUND))
+		if (Assets.exists(gottenPath, SOUND))
 		{
 			if (!currentTrackedSounds.exists(gottenPath))
 				currentTrackedSounds.set(gottenPath, Assets.getSound(gottenPath));

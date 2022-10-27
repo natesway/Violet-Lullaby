@@ -76,6 +76,7 @@ class OptionsMenuState extends MusicBeatState
 					['Meta Settings', null],
 					['', null],
 					["Framerate Cap", getFromOption],
+					["Texture Compression", getFromOption],
 					['FPS Counter', getFromOption],
 					['Memory Counter', getFromOption],
 					['Debug Info', getFromOption],

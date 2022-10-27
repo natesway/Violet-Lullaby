@@ -130,6 +130,9 @@ class Main extends Sprite
 		SUtil.check();
 
 		FlxTransitionableState.skipNextTransIn = true;
+		#if debug
+		hypnoDebug = true;
+		#end
 
 		// here we set up the base game
 		addChild(new FlxGame(gameWidth, gameHeight, mainClassState, zoom, framerate, framerate, skipSplash));

@@ -61,6 +61,12 @@ class Init extends FlxState
 			'Whether to display approximately how much memory is being used.',
 			NOT_FORCED
 		],
+		'Texture Compression' => [
+			false,
+			Checkmark,
+			'Whether to use the gpu to rander some of the textures',
+			NOT_FORCED
+		],
 		'Debug Info' => [
 			false,
 			Checkmark,

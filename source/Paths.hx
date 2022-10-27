@@ -135,7 +135,7 @@ class Paths
 				var bitmap:BitmapData = Assets.getBitmapData(path);
 				var graphic:FlxGraphic;
 
-				if (compression)
+				if (compression && Init.trueSettings.get('Texture Compression'))
 				{
 					var texture:Texture = FlxG.stage.context3D.createTexture(bitmap.width, bitmap.height, BGRA, true, 0);
 					texture.uploadFromBitmapData(bitmap);

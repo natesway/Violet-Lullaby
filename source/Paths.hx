@@ -95,10 +95,13 @@ class Paths
 			{
 				if (currentTrackedSounds.exists(key))
 				{
-					Assets.cache.removeSound(key);
-					Assets.cache.clearSounds(key);
-					Assets.cache.clear(key);
-					currentTrackedSounds.remove(key);
+					if (Assets.cache.hasSound(key))
+					{
+						Assets.cache.removeSound(key);
+						Assets.cache.clearSounds(key);
+						Assets.cache.clear(key);
+						currentTrackedSounds.remove(key);
+					}
 				}
 			}
 		}
@@ -135,7 +138,7 @@ class Paths
 		{
 			if (key != null && !currentTrackedSounds.exists(key))
 			{
-				if (Assets.cache.getSound(key) != null)
+				if (Assets.cache.hasSound(key))
 				{
 					Assets.cache.removeSound(key);
 					Assets.cache.clearSounds(key);

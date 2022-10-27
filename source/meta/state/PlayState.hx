@@ -3361,7 +3361,13 @@ class PlayState extends MusicBeatState
 			//
 		}
 
-		var holdControls:Array<Bool> = [controls.LEFT, controls.DOWN, controls.UP, controls.RIGHT, controls.SPACE];
+		var holdControls:Array<Bool> = [];
+
+		if (bronzongMechanic)
+			holdControls = [controls.LEFT, controls.DOWN, controls.UP, controls.RIGHT, controls.SPACE];
+		else
+			holdControls = [controls.LEFT, controls.DOWN, controls.UP, controls.RIGHT];
+
 		if (!autoplay)
 		{
 			// check if anything is held

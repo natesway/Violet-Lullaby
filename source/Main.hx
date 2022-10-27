@@ -184,11 +184,15 @@ class Main extends Sprite
 		{
 			FlxG.updateFramerate = newFramerate;
 			FlxG.drawFramerate = newFramerate;
+			FlxG.game.focusLostFramerate = newFramerate;
+			Lib.current.stage.frameRate = newFramerate;
 		}
 		else
 		{
 			FlxG.drawFramerate = newFramerate;
 			FlxG.updateFramerate = newFramerate;
+			FlxG.game.focusLostFramerate = newFramerate;
+			Lib.current.stage.frameRate = newFramerate;
 		}
 	}
 }

@@ -184,8 +184,8 @@ class UnownSubstate extends MusicBeatSubState
 			//its case sensitive.
 			if (realWord.charAt(position).toUpperCase() == daKey.toUpperCase())
 				correctLetter();
-			else
-				FlxG.sound.play(Paths.sound('missnote' + FlxG.random.int(1,3)), 0.7); //too loud lol
+			// else fuck this sound.
+				// FlxG.sound.play(Paths.sound('missnote' + FlxG.random.int(1,3)), 0.7); //too loud lol
 		}
 	}
 

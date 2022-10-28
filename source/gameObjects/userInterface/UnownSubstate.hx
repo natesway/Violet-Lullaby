@@ -179,10 +179,13 @@ class UnownSubstate extends MusicBeatSubState
 				return;
 
 			var daKey:String = String.fromCharCode(e.charCode);
-			if (realWord.charAt(position) == daKey)
+			// trace(daKey);
+
+			//its case sensitive.
+			if (realWord.charAt(position).toUpperCase() == daKey.toUpperCase())
 				correctLetter();
 			else
-				FlxG.sound.play(Paths.sound('BUZZER'));
+				FlxG.sound.play(Paths.sound('missnote' + FlxG.random.int(1,3)), 0.7); //too loud lol
 		}
 	}
 

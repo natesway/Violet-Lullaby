@@ -825,20 +825,32 @@ class GameOverSubstate extends MusicBeatSubState
 		if (!isEnding)
 		{
 			isEnding = true;
-			if (deathEnd != null)
-				deathEnd();
-			if (FlxG.sound.music != null)
-				FlxG.sound.music.stop();
-			FlxG.sound.play(Paths.music(endSoundName));
-			new FlxTimer().start(timeBeforeEnd, function(tmr:FlxTimer)
-			{
-				FlxG.camera.fade(FlxColor.BLACK, 1, false, function()
-				{
+			switch (PlayState.SONG.song.toLowerCase()) {
+				case "insomnia": //moment
+					// if (FlxG.sound.music != null)
+					// 	FlxG.sound.music.stop();
+					if (deathEnd != null)
+						deathEnd();
 					if (onEnd != null)
 						onEnd();
+
 					Main.switchState(this, new PlayState());
-				});
-			});
+				default:
+					if (deathEnd != null)
+						deathEnd();
+					if (FlxG.sound.music != null)
+						FlxG.sound.music.stop();
+					FlxG.sound.play(Paths.music(endSoundName));
+					new FlxTimer().start(timeBeforeEnd, function(tmr:FlxTimer)
+					{
+						FlxG.camera.fade(FlxColor.BLACK, 1, false, function()
+						{
+							if (onEnd != null)
+								onEnd();
+							Main.switchState(this, new PlayState());
+						});
+					});
+			}
 			//
 		}
 	}

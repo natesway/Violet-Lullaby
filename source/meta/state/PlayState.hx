@@ -1015,9 +1015,9 @@ class PlayState extends MusicBeatState
 				pendulumFade();
 			if (accuracyMod)
 			{
-				accuracyThreshold = 90;
+				accuracyThreshold = 90; //
 				if (gameplayMode == HELL_MODE)
-					accuracyThreshold = 98;
+					accuracyThreshold = 98; //not changing this lmfao
 
 				accuracyText = new FlxText();
 				accuracyText.setFormat(Paths.font('vcr.ttf'), 18, FlxColor.WHITE);

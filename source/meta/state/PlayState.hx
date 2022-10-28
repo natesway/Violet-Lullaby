@@ -1463,6 +1463,9 @@ class PlayState extends MusicBeatState
 		{
 			// /*
 			missingnoGlitch = new GraphicsShader("", Paths.shader('glitch'));
+			missingnoGlitch.data.time.value = [0.0];
+			missingnoGlitch.data.prob.value = [0.0];
+			missingnoGlitch.data.intensityChromatic.value = [0.0];
 			shaderCatalog.push(new ShaderFilter(missingnoGlitch));
 			missingnoIndex = shaderCatalog.length - 1;
 			camGame.setFilters(shaderCatalog);
@@ -1480,6 +1483,9 @@ class PlayState extends MusicBeatState
 		if (!frostSet)
 		{
 			frostbiteShader = new ShaderFilter(new GraphicsShader("", Paths.shader('snowfall')));
+			frostbiteShader.shader.data.amount.value = [200];
+			frostbiteShader.shader.data.intensity.value = [0.0];
+			frostbiteShader.shader.data.time.value = [0.0];
 			vignetteCam.setFilters([frostbiteShader]);
 			frostSet = true;
 		}
@@ -1541,6 +1547,7 @@ class PlayState extends MusicBeatState
 		{
 			// /*
 			brimstoneShader = new GraphicsShader("", Paths.shader('camEffects'));
+			brimstoneShader.data.distort.value = [0.0];
 			shaderCatalog.push(new ShaderFilter(brimstoneShader));
 			brimstoneIndex = shaderCatalog.length - 1;
 			camGame.setFilters(shaderCatalog);

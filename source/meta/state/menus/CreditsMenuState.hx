@@ -188,11 +188,10 @@ frostbite,shitno,monochrome,stranged red and isotope,missingno and a few other s
 		sprite.frames = Paths.getSparrowAtlas('menus/credit/CREDITS_TV');
 		sprite.animation.addByPrefix('CREDITS TV', 'CREDITS TV', 24);
 		sprite.animation.play('CREDITS TV');
-		add(sprite);
 		sprite.screenCenter();
 		sprite.cameras = [camGame];
 		sprite.y += 16;
-		camHUD.cameras = [camGame];
+		add(sprite);
 
 		camHUD.x = FlxG.width / 2 - camHUD.width / 2;
 		camHUD.y = (FlxG.height / 2 - camHUD.height / 2) - 64;
@@ -299,9 +298,7 @@ frostbite,shitno,monochrome,stranged red and isotope,missingno and a few other s
 	}
 
 	public var moverCooldown:Float = 0;
-
 	public var verticalSelection:Int = 0;
-
 	public var topText:FlxText;
 	public var stupidQuote:FlxText;
 	public var professionText:FlxText;

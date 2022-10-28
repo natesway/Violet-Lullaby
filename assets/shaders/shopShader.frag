@@ -9,8 +9,8 @@
 #define validuv(v) (abs(v.x-0.5)<0.5&&abs(v.y-0.5)<0.5)
 #define SAMPLES 3
 
-uniform float aberration = 0.0;
-uniform float effectTime = 0.0;
+uniform float aberration;
+uniform float effectTime;
 uniform sampler2D noiseTexture; 
 
 vec3 tex2D(sampler2D _tex,vec2 _p)

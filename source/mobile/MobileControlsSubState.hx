@@ -18,13 +18,14 @@ import openfl.utils.Assets;
 class MobileControlsSubState extends FlxSubState
 {
 	final controlsItems:Array<String> = ['Pad-Right', 'Pad-Left', 'Pad-Custom', 'Pad-Duo', 'Hitbox', 'Keyboard'];
+
+	var grpControlsItems:FlxText;
 	var virtualPad:FlxVirtualPad;
 	var hitbox:FlxHitbox;
 	var upPozition:FlxText;
 	var downPozition:FlxText;
 	var leftPozition:FlxText;
 	var rightPozition:FlxText;
-	var inputvari:FlxText;
 	var funitext:FlxText;
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
@@ -86,24 +87,26 @@ class MobileControlsSubState extends FlxSubState
 		funitext.setFormat(Assets.getFont('assets/mobile/menu/Funkin Bold.otf').fontName, 42, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE,
 			FlxColor.BLACK, true);
 		funitext.borderSize = 3;
+		funitext.borderQuality = 1;
 		funitext.screenCenter();
 		funitext.visible = false;
 		add(funitext);
 
-		inputvari = new FlxText(0, 100, 0, '', 42);
-		inputvari.setFormat(Assets.getFont('assets/mobile/menu/Funkin Bold.otf').fontName, 42, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE,
+		grpControlsItems = new FlxText(0, 100, 0, '', 42);
+		grpControlsItems.setFormat(Assets.getFont('assets/mobile/menu/Funkin Bold.otf').fontName, 42, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE,
 			FlxColor.BLACK, true);
-		inputvari.borderSize = 3;
-		inputvari.screenCenter(X);
-		add(inputvari);
+		grpControlsItems.borderSize = 3;
+		grpControlsItems.borderQuality = 1;
+		grpControlsItems.screenCenter(X);
+		add(grpControlsItems);
 
-		leftArrow = new FlxSprite(inputvari.x - 60, inputvari.y - 25);
+		leftArrow = new FlxSprite(grpControlsItems.x - 60, grpControlsItems.y - 25);
 		leftArrow.frames = FlxAtlasFrames.fromSparrow(Assets.getBitmapData('assets/mobile/menu/arrows.png'), Assets.getText('assets/mobile/menu/arrows.xml'));
 		leftArrow.animation.addByPrefix('idle', 'arrow left');
 		leftArrow.animation.play('idle');
 		add(leftArrow);
 
-		rightArrow = new FlxSprite(inputvari.x + inputvari.width + 10, inputvari.y - 25);
+		rightArrow = new FlxSprite(grpControlsItems.x + grpControlsItems.width + 10, grpControlsItems.y - 25);
 		rightArrow.frames = FlxAtlasFrames.fromSparrow(Assets.getBitmapData('assets/mobile/menu/arrows.png'), Assets.getText('assets/mobile/menu/arrows.xml'));
 		rightArrow.animation.addByPrefix('idle', 'arrow right');
 		rightArrow.animation.play('idle');
@@ -113,24 +116,28 @@ class MobileControlsSubState extends FlxSubState
 		rightPozition.setFormat(Assets.getFont('assets/mobile/menu/Funkin Bold.otf').fontName, 21, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE,
 			FlxColor.BLACK, true);
 		rightPozition.borderSize = 3;
+		rightPozition.borderQuality = 1;
 		add(rightPozition);
 
 		leftPozition = new FlxText(10, FlxG.height - 44, 0, '', 21);
 		leftPozition.setFormat(Assets.getFont('assets/mobile/menu/Funkin Bold.otf').fontName, 21, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE,
 			FlxColor.BLACK, true);
 		leftPozition.borderSize = 3;
+		leftPozition.borderQuality = 1;
 		add(leftPozition);
 
 		downPozition = new FlxText(10, FlxG.height - 64, 0, '', 21);
 		downPozition.setFormat(Assets.getFont('assets/mobile/menu/Funkin Bold.otf').fontName, 21, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE,
 			FlxColor.BLACK, true);
 		downPozition.borderSize = 3;
+		downPozition.borderQuality = 1;
 		add(downPozition);
 
 		upPozition = new FlxText(10, FlxG.height - 84, 0, '', 21);
 		upPozition.setFormat(Assets.getFont('assets/mobile/menu/Funkin Bold.otf').fontName, 21, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE,
 			FlxColor.BLACK, true);
 		upPozition.borderSize = 3;
+		upPozition.borderQuality = 1;
 		add(upPozition);
 
 		changeSelection();
@@ -142,10 +149,10 @@ class MobileControlsSubState extends FlxSubState
 	{
 		super.update(elapsed);
 
-		inputvari.text = controlsItems[curSelected];
-		inputvari.screenCenter(X);
-		leftArrow.x = inputvari.x - 60;
-		rightArrow.x = inputvari.x + inputvari.width + 10;
+		grpControlsItems.text = controlsItems[curSelected].toUpperCase();
+		grpControlsItems.screenCenter(X);
+		leftArrow.x = grpControlsItems.x - 60;
+		rightArrow.x = grpControlsItems.x + grpControlsItems.width + 10;
 
 		for (touch in FlxG.touches.list)
 		{
@@ -186,16 +193,16 @@ class MobileControlsSubState extends FlxSubState
 		if (virtualPad != null)
 		{
 			if (virtualPad.buttonUp != null)
-				upPozition.text = 'Button Up X:' + virtualPad.buttonUp.x + ' Y:' + virtualPad.buttonUp.y;
+				upPozition.text = 'BUTTON UP X:' + virtualPad.buttonUp.x + ' Y:' + virtualPad.buttonUp.y;
 
 			if (virtualPad.buttonDown != null)
-				downPozition.text = 'Button Down X:' + virtualPad.buttonDown.x + ' Y:' + virtualPad.buttonDown.y;
+				downPozition.text = 'BUTTON DOWN X:' + virtualPad.buttonDown.x + ' Y:' + virtualPad.buttonDown.y;
 
 			if (virtualPad.buttonLeft != null)
-				leftPozition.text = 'Button Left X:' + virtualPad.buttonLeft.x + ' Y:' + virtualPad.buttonLeft.y;
+				leftPozition.text = 'BUTTON LEFT X:' + virtualPad.buttonLeft.x + ' Y:' + virtualPad.buttonLeft.y;
 
 			if (virtualPad.buttonRight != null)
-				rightPozition.text = 'Button Right X:' + virtualPad.buttonRight.x + ' Y:' + virtualPad.buttonRight.y;
+				rightPozition.text = 'BUTTON RIGHT X:' + virtualPad.buttonRight.x + ' Y:' + virtualPad.buttonRight.y;
 		}
 	}
 

@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 
@@ -74,6 +75,7 @@
 	<haxedef name="HXCPP_CHECK_POINTER" />
 	<haxedef name="HXCPP_STACK_LINE" />
 
+	<haxedef name="hscriptPos" if="hscript" />
 	<!--Android Internet Connection-->
 	<config:android permission="android.permission.ACCESS_NETWORK_STATE" />
 	<config:android permission="android.permission.ACCESS_WIFI_STATE" />

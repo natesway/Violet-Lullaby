@@ -21,6 +21,7 @@ import openfl.display.GraphicsShader;
 import openfl.filters.ShaderFilter;
 import openfl.media.Sound;
 import openfl.utils.Assets;
+import vlc.MP4Handler;
 
 class GameOverSubstate extends MusicBeatSubState
 {
@@ -613,7 +614,7 @@ class GameOverSubstate extends MusicBeatSubState
 					bg.antialiasing = true;
 
 					#if VIDEOS_ALLOWED
-					var video:VideoHandler = new VideoHandler();
+					var video:MP4Handler = new MP4Handler();
 					video.playVideo(SUtil.getPath() + Paths.video('feraligatr'));
 					video.finishCallback = function()
 					{

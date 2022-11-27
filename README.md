@@ -27,7 +27,7 @@ If you want to build the mod for yourself:
   - systools [git; use https://github.com/waneck/systools]
     - Run `lime rebuild systools linux`.
     
-# Pre-compilation
+# Compilation
 
 If you are using Gentoo, merge `net-libs/libidn11::violet-funk` AND `media-video/vlc`. Then, run these commands in order:
 

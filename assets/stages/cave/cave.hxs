@@ -98,6 +98,7 @@ function onEvent(eventName) {
 					PlayState.instance.flipHealthbar();
 					PlayState.instance.lcBar2();		
 					PlayState.instance.pendulum.alpha = 1;
+					// Omit the above line if you are using the lowest mechanic difficulty. Just put two forward slashes in front of it.
 					PlayState.instance.camZooming = true;						
 					FlxTween.tween(PlayState.camHUD, {alpha: 1}, 0.2);	
 					FlxTween.tween(PlayState.uiHUD, {alpha: 1}, 0.2);

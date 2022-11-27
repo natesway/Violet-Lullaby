@@ -1,7 +1,5 @@
 // https://www.shadertoy.com/view/XtyXzW
-
 #pragma header
-#extension GL_EXT_gpu_shader4 : enable
 
 uniform float time;
 uniform float prob;
@@ -65,7 +63,7 @@ GlitchSeed glitchSeed(vec2 p, float speed) {
 }
 
 float shouldApply(GlitchSeed seed) {
-    return round(
+    return _round(
         mix(
             mix(rand(seed.seed), 1., seed.prob - .5),
             0.,
@@ -75,7 +73,7 @@ float shouldApply(GlitchSeed seed) {
 }
 
 // gamma again 
-const float GAMMA = 1;
+const float GAMMA = 1.0;
 
 vec3 gamma(vec3 color, float g) {
     return pow(color, vec3(g));
@@ -142,7 +140,7 @@ void staticNoise(inout vec2 p, vec2 groupSize, float grainSize, float contrast) 
     if (shouldApply(seedA) == 1.) {
         GlitchSeed seedB = glitchSeed(glitchCoord(p, vec2(grainSize)), 5.);
         vec2 offset = vec2(rand(seedB.seed), rand(seedB.seed + .1));
-        offset = round(offset * 2. - 1.);
+        offset = _round(offset * 2. - 1.);
         offset *= contrast;
         p += offset;
     }

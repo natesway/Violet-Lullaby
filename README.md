@@ -43,4 +43,4 @@ Once you've done all this, clone `https://github.com/MagelessMayhem/Violet-Lulla
 **Known issues (list is subject to growth):**
 
 - The shop menu's shaders do not show correctly. They appear as 3 abnormally colored quadrilaterals, covering 3 of the 4 quadrants of the rendering window (NOT the full application window). This effect disappears when exiting freeplay.
-- During Lost Cause, after Hypno appears and GF stands up, GF's animations cancel out and she ends up becoming an FlxSprite statue.
+- During Lost Cause, after Hypno appears and GF stands up, GF's animations cancel out and she ends up becoming a(n?) FlxSprite statue.

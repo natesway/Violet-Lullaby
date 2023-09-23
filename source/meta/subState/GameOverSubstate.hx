@@ -629,7 +629,7 @@ class GameOverSubstate extends MusicBeatSubState
 
 						bg.setGraphicSize(Std.int(FlxG.width), Std.int(FlxG.height));
 						bg.screenCenter();
-					}
+					})
 
 //					deathEnd = function()
 //					{

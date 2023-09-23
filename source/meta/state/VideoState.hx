@@ -2,7 +2,12 @@ package meta.state;
 
 import meta.MusicBeat.MusicBeatState;
 import sys.FileSystem;
-import vlc.MP4Handler;
+#if VIDEOS_ALLOWED 
+#if (hxCodec >= "3.0.0") import hxcodec.flixel.FlxVideo as MP4Handler;
+#elseif (hxCodec >= "2.6.1") import hxcodec.VideoHandler as MP4Handler;
+#elseif (hxCodec == "2.6.0") import MP4Handler;
+#else import vlc.MP4Handler as MP4Handler; #end
+#end
 
 class VideoState extends MusicBeatState
 {

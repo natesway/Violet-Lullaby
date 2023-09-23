@@ -49,13 +49,13 @@ jobs:
           haxelib --quiet git faxe https://github.com/uhrobots/faxe
           haxelib --quiet git tentools https://github.com/TentaRJ/tentools
           haxelib --quiet git systools https://github.com/waneck/systools
-          lime rebuild systools linux
+          haxelib run lime rebuild systools linux
 
       - name: Compile
         run: haxelib run lime build linux -release
 
       - name: Publish Artifact
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v2.2.4
         with:
-          name: androidBuild-release
-          path: export/release/linux/bin/
+          name: linuxBuild
+          path: 'export/release/linux/bin'

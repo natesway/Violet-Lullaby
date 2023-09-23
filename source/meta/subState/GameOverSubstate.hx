@@ -631,34 +631,34 @@ class GameOverSubstate extends MusicBeatSubState
 						bg.screenCenter();
 					}
 
-					deathEnd = function()
-					{
-						if (video != null)
-						{
-							@:privateAccess
-							video.onEndReached();
-						}
-						FlxTween.tween(bg, {alpha: 0}, timeBeforeEnd, {ease: FlxEase.linear});
+//					deathEnd = function()
+//					{
+//						if (video != null)
+	//					{
+	//						@:privateAccess
+	//						video.onEndReached();
+	//					}
+	//					FlxTween.tween(bg, {alpha: 0}, timeBeforeEnd, {ease: FlxEase.linear});
 
-						onEnd = function()
-						{
-							remove(bg);
-							bg.pixels.dispose();
-							bg = null;
-						};
-
-						Conductor.changeBPM(100);
-					};
-
-					escapeFunction = function()
-					{
-						if (video != null)
-						{
-							@:privateAccess
-							video.onEndReached();
-						}
-					}
-					#else
+		//				onEnd = function()
+	//					{
+	//						remove(bg);
+		//					bg.pixels.dispose();
+		//					bg = null;
+		//				};
+//
+		//				Conductor.changeBPM(100);
+		//			};
+//
+			//		escapeFunction = function()
+			//		{
+					//	if (video != null)
+					//	{
+				//			@:privateAccess
+				//			video.onEndReached();
+				//		}
+				//	}
+				//	#else
 					deathEnd = function()
 						{
 							FlxTween.tween(bg, {alpha: 0}, timeBeforeEnd, {ease: FlxEase.linear});

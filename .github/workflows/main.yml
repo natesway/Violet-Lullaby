@@ -42,7 +42,6 @@ jobs:
           haxelib --quiet install hscript 2.5.0
           haxelib --quiet install hxcpp-debug-server
           haxelib --quiet install newgrounds 1.1.5
-          haxelib --quiet install flxanimate
           haxelib --quiet git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib --quiet git polymod https://github.com/larsiusprime/polymod
           haxelib --quiet git hxCodec https://github.com/polybiusproxy/hxCodec.git

@@ -621,8 +621,8 @@ class GameOverSubstate extends MusicBeatSubState
 
 					#if VIDEOS_ALLOWED
 					var video:MP4Handler = new MP4Handler();
-					video.playVideo(SUtil.getPath() + Paths.video('feraligatr'));
-					video.finishCallback = function()
+					video.play(SUtil.getPath() + Paths.video('feraligatr'));
+					video.onEndReached.add(function()
 					{
 						if (video.bitmapData != null)
 							bg.pixels = video.bitmapData;
@@ -636,7 +636,7 @@ class GameOverSubstate extends MusicBeatSubState
 						if (video != null)
 						{
 							@:privateAccess
-							video.onVLCComplete();
+							video.onEndReached();
 						}
 						FlxTween.tween(bg, {alpha: 0}, timeBeforeEnd, {ease: FlxEase.linear});
 
@@ -655,7 +655,7 @@ class GameOverSubstate extends MusicBeatSubState
 						if (video != null)
 						{
 							@:privateAccess
-							video.onVLCComplete();
+							video.onEndReached();
 						}
 					}
 					#else

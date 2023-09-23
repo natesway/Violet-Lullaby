@@ -27,6 +27,10 @@ jobs:
 
       - name: Install Haxelibs
         run: |
+          sudo apt-get install libvlc-dev
+          sudo apt-get install libvlccore-dev
+          sudo apt-get install libvlc-bin
+          sudo apt-get install vlc-bin
           haxelib --quiet install lime 8.0.0
           haxelib --quiet install openfl 9.1.0
           haxelib --quiet install flixel 4.11.0

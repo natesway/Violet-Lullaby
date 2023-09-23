@@ -26,7 +26,7 @@ class VideoState extends MusicBeatState
 		}
 
 		var video:MP4Handler = new MP4Handler();
-		video.video(filepath);
+		video.play(filepath);
 		video.onEndReached.add(function()
 		{
 			close();

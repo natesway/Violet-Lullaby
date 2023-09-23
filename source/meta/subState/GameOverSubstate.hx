@@ -629,7 +629,7 @@ class GameOverSubstate extends MusicBeatSubState
 
 						bg.setGraphicSize(Std.int(FlxG.width), Std.int(FlxG.height));
 						bg.screenCenter();
-					})
+					}
 
 //					deathEnd = function()
 //					{
@@ -672,6 +672,7 @@ class GameOverSubstate extends MusicBeatSubState
 	
 							Conductor.changeBPM(100);
 						};
+					);
 					#end
 				}
 				else if (PlayState.SONG.song.toLowerCase() == "monochrome")

@@ -659,6 +659,7 @@ class GameOverSubstate extends MusicBeatSubState
 				//		}
 				//	}
 				//	#else
+					);
 					deathEnd = function()
 						{
 							FlxTween.tween(bg, {alpha: 0}, timeBeforeEnd, {ease: FlxEase.linear});
@@ -672,7 +673,6 @@ class GameOverSubstate extends MusicBeatSubState
 	
 							Conductor.changeBPM(100);
 						};
-					);
 					#end
 				}
 				else if (PlayState.SONG.song.toLowerCase() == "monochrome")
